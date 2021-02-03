@@ -1,0 +1,31 @@
+{
+  "namespace": ["cfd", "dlc", "js", "api", "json"],
+  "request": {
+    ":class": "VerifyCetAdaptorSignatureMultiOracleRequest",
+    ":class:comment": "Verify a signature for a CET",
+    "cetHex": "",
+    "adaptorSignature": "",
+    "adaptorProof": "",
+    "oracleInfos": [
+      {
+        ":class": "OracleInfo",
+        "messages": [""],
+        "oraclePubkey": "",
+        "oracleRValues": [""]
+      }
+    ],
+    "localFundPubkey": "",
+    "remoteFundPubkey": "",
+    "fundTxId": "",
+    "fundVout": 0,
+    "fundVout:type": "uint32_t",
+    "fundVout:require": "optional",
+    "fundInputAmount": 0,
+    "fundInputAmount:type": "uint64_t",
+    "verifyRemote": true
+  },
+  "response": {
+    ":class": "VerifyCetAdaptorSignatureResponse",
+    "valid": false
+  }
+}

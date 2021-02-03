@@ -103,6 +103,59 @@ MessagesStruct Messages::ConvertToStruct() const {  // NOLINT
 }
 
 // ------------------------------------------------------------------------
+// OracleInfo
+// ------------------------------------------------------------------------
+cfd::core::JsonTableMap<OracleInfo>
+  OracleInfo::json_mapper;
+std::vector<std::string> OracleInfo::item_list;
+
+void OracleInfo::CollectFieldName() {
+  if (!json_mapper.empty()) {
+    return;
+  }
+  cfd::core::CLASS_FUNCTION_TABLE<OracleInfo> func_table;  // NOLINT
+
+  func_table = {
+    OracleInfo::GetOraclePubkeyString,
+    OracleInfo::SetOraclePubkeyString,
+    OracleInfo::GetOraclePubkeyFieldType,
+  };
+  json_mapper.emplace("oraclePubkey", func_table);
+  item_list.push_back("oraclePubkey");
+  func_table = {
+    OracleInfo::GetOracleRValuesString,
+    OracleInfo::SetOracleRValuesString,
+    OracleInfo::GetOracleRValuesFieldType,
+  };
+  json_mapper.emplace("oracleRValues", func_table);
+  item_list.push_back("oracleRValues");
+  func_table = {
+    OracleInfo::GetMessagesString,
+    OracleInfo::SetMessagesString,
+    OracleInfo::GetMessagesFieldType,
+  };
+  json_mapper.emplace("messages", func_table);
+  item_list.push_back("messages");
+}
+
+void OracleInfo::ConvertFromStruct(
+    const OracleInfoStruct& data) {
+  oracle_pubkey_ = data.oracle_pubkey;
+  oracle_r_values_.ConvertFromStruct(data.oracle_r_values);
+  messages_.ConvertFromStruct(data.messages);
+  ignore_items = data.ignore_items;
+}
+
+OracleInfoStruct OracleInfo::ConvertToStruct() const {  // NOLINT
+  OracleInfoStruct result;
+  result.oracle_pubkey = oracle_pubkey_;
+  result.oracle_r_values = oracle_r_values_.ConvertToStruct();
+  result.messages = messages_.ConvertToStruct();
+  result.ignore_items = ignore_items;
+  return result;
+}
+
+// ------------------------------------------------------------------------
 // AddSignatureToFundTransactionRequest
 // ------------------------------------------------------------------------
 cfd::core::JsonTableMap<AddSignatureToFundTransactionRequest>
@@ -621,6 +674,104 @@ CreateCetAdaptorSignatureResponseStruct CreateCetAdaptorSignatureResponse::Conve
   CreateCetAdaptorSignatureResponseStruct result;
   result.signature = signature_;
   result.proof = proof_;
+  result.ignore_items = ignore_items;
+  return result;
+}
+
+// ------------------------------------------------------------------------
+// CreateCetAdaptorSignatureMultiOracleRequest
+// ------------------------------------------------------------------------
+cfd::core::JsonTableMap<CreateCetAdaptorSignatureMultiOracleRequest>
+  CreateCetAdaptorSignatureMultiOracleRequest::json_mapper;
+std::vector<std::string> CreateCetAdaptorSignatureMultiOracleRequest::item_list;
+
+void CreateCetAdaptorSignatureMultiOracleRequest::CollectFieldName() {
+  if (!json_mapper.empty()) {
+    return;
+  }
+  cfd::core::CLASS_FUNCTION_TABLE<CreateCetAdaptorSignatureMultiOracleRequest> func_table;  // NOLINT
+
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetCetHexString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetCetHexString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetCetHexFieldType,
+  };
+  json_mapper.emplace("cetHex", func_table);
+  item_list.push_back("cetHex");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetPrivkeyString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetPrivkeyString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetPrivkeyFieldType,
+  };
+  json_mapper.emplace("privkey", func_table);
+  item_list.push_back("privkey");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetFundTxIdString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetFundTxIdString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetFundTxIdFieldType,
+  };
+  json_mapper.emplace("fundTxId", func_table);
+  item_list.push_back("fundTxId");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetFundVoutString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetFundVoutString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetFundVoutFieldType,
+  };
+  json_mapper.emplace("fundVout", func_table);
+  item_list.push_back("fundVout");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetLocalFundPubkeyString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetLocalFundPubkeyString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetLocalFundPubkeyFieldType,
+  };
+  json_mapper.emplace("localFundPubkey", func_table);
+  item_list.push_back("localFundPubkey");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetRemoteFundPubkeyString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetRemoteFundPubkeyString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetRemoteFundPubkeyFieldType,
+  };
+  json_mapper.emplace("remoteFundPubkey", func_table);
+  item_list.push_back("remoteFundPubkey");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetOracleInfosString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetOracleInfosString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetOracleInfosFieldType,
+  };
+  json_mapper.emplace("oracleInfos", func_table);
+  item_list.push_back("oracleInfos");
+  func_table = {
+    CreateCetAdaptorSignatureMultiOracleRequest::GetFundInputAmountString,
+    CreateCetAdaptorSignatureMultiOracleRequest::SetFundInputAmountString,
+    CreateCetAdaptorSignatureMultiOracleRequest::GetFundInputAmountFieldType,
+  };
+  json_mapper.emplace("fundInputAmount", func_table);
+  item_list.push_back("fundInputAmount");
+}
+
+void CreateCetAdaptorSignatureMultiOracleRequest::ConvertFromStruct(
+    const CreateCetAdaptorSignatureMultiOracleRequestStruct& data) {
+  cet_hex_ = data.cet_hex;
+  privkey_ = data.privkey;
+  fund_tx_id_ = data.fund_tx_id;
+  fund_vout_ = data.fund_vout;
+  local_fund_pubkey_ = data.local_fund_pubkey;
+  remote_fund_pubkey_ = data.remote_fund_pubkey;
+  oracle_infos_.ConvertFromStruct(data.oracle_infos);
+  fund_input_amount_ = data.fund_input_amount;
+  ignore_items = data.ignore_items;
+}
+
+CreateCetAdaptorSignatureMultiOracleRequestStruct CreateCetAdaptorSignatureMultiOracleRequest::ConvertToStruct() const {  // NOLINT
+  CreateCetAdaptorSignatureMultiOracleRequestStruct result;
+  result.cet_hex = cet_hex_;
+  result.privkey = privkey_;
+  result.fund_tx_id = fund_tx_id_;
+  result.fund_vout = fund_vout_;
+  result.local_fund_pubkey = local_fund_pubkey_;
+  result.remote_fund_pubkey = remote_fund_pubkey_;
+  result.oracle_infos = oracle_infos_.ConvertToStruct();
+  result.fund_input_amount = fund_input_amount_;
   result.ignore_items = ignore_items;
   return result;
 }
@@ -2213,6 +2364,122 @@ void VerifyCetAdaptorSignatureResponse::ConvertFromStruct(
 VerifyCetAdaptorSignatureResponseStruct VerifyCetAdaptorSignatureResponse::ConvertToStruct() const {  // NOLINT
   VerifyCetAdaptorSignatureResponseStruct result;
   result.valid = valid_;
+  result.ignore_items = ignore_items;
+  return result;
+}
+
+// ------------------------------------------------------------------------
+// VerifyCetAdaptorSignatureMultiOracleRequest
+// ------------------------------------------------------------------------
+cfd::core::JsonTableMap<VerifyCetAdaptorSignatureMultiOracleRequest>
+  VerifyCetAdaptorSignatureMultiOracleRequest::json_mapper;
+std::vector<std::string> VerifyCetAdaptorSignatureMultiOracleRequest::item_list;
+
+void VerifyCetAdaptorSignatureMultiOracleRequest::CollectFieldName() {
+  if (!json_mapper.empty()) {
+    return;
+  }
+  cfd::core::CLASS_FUNCTION_TABLE<VerifyCetAdaptorSignatureMultiOracleRequest> func_table;  // NOLINT
+
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetCetHexString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetCetHexString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetCetHexFieldType,
+  };
+  json_mapper.emplace("cetHex", func_table);
+  item_list.push_back("cetHex");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetAdaptorSignatureString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetAdaptorSignatureString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetAdaptorSignatureFieldType,
+  };
+  json_mapper.emplace("adaptorSignature", func_table);
+  item_list.push_back("adaptorSignature");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetAdaptorProofString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetAdaptorProofString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetAdaptorProofFieldType,
+  };
+  json_mapper.emplace("adaptorProof", func_table);
+  item_list.push_back("adaptorProof");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetOracleInfosString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetOracleInfosString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetOracleInfosFieldType,
+  };
+  json_mapper.emplace("oracleInfos", func_table);
+  item_list.push_back("oracleInfos");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetLocalFundPubkeyString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetLocalFundPubkeyString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetLocalFundPubkeyFieldType,
+  };
+  json_mapper.emplace("localFundPubkey", func_table);
+  item_list.push_back("localFundPubkey");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetRemoteFundPubkeyString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetRemoteFundPubkeyString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetRemoteFundPubkeyFieldType,
+  };
+  json_mapper.emplace("remoteFundPubkey", func_table);
+  item_list.push_back("remoteFundPubkey");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetFundTxIdString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetFundTxIdString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetFundTxIdFieldType,
+  };
+  json_mapper.emplace("fundTxId", func_table);
+  item_list.push_back("fundTxId");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetFundVoutString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetFundVoutString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetFundVoutFieldType,
+  };
+  json_mapper.emplace("fundVout", func_table);
+  item_list.push_back("fundVout");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetFundInputAmountString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetFundInputAmountString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetFundInputAmountFieldType,
+  };
+  json_mapper.emplace("fundInputAmount", func_table);
+  item_list.push_back("fundInputAmount");
+  func_table = {
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetVerifyRemoteString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::SetVerifyRemoteString,
+    VerifyCetAdaptorSignatureMultiOracleRequest::GetVerifyRemoteFieldType,
+  };
+  json_mapper.emplace("verifyRemote", func_table);
+  item_list.push_back("verifyRemote");
+}
+
+void VerifyCetAdaptorSignatureMultiOracleRequest::ConvertFromStruct(
+    const VerifyCetAdaptorSignatureMultiOracleRequestStruct& data) {
+  cet_hex_ = data.cet_hex;
+  adaptor_signature_ = data.adaptor_signature;
+  adaptor_proof_ = data.adaptor_proof;
+  oracle_infos_.ConvertFromStruct(data.oracle_infos);
+  local_fund_pubkey_ = data.local_fund_pubkey;
+  remote_fund_pubkey_ = data.remote_fund_pubkey;
+  fund_tx_id_ = data.fund_tx_id;
+  fund_vout_ = data.fund_vout;
+  fund_input_amount_ = data.fund_input_amount;
+  verify_remote_ = data.verify_remote;
+  ignore_items = data.ignore_items;
+}
+
+VerifyCetAdaptorSignatureMultiOracleRequestStruct VerifyCetAdaptorSignatureMultiOracleRequest::ConvertToStruct() const {  // NOLINT
+  VerifyCetAdaptorSignatureMultiOracleRequestStruct result;
+  result.cet_hex = cet_hex_;
+  result.adaptor_signature = adaptor_signature_;
+  result.adaptor_proof = adaptor_proof_;
+  result.oracle_infos = oracle_infos_.ConvertToStruct();
+  result.local_fund_pubkey = local_fund_pubkey_;
+  result.remote_fund_pubkey = remote_fund_pubkey_;
+  result.fund_tx_id = fund_tx_id_;
+  result.fund_vout = fund_vout_;
+  result.fund_input_amount = fund_input_amount_;
+  result.verify_remote = verify_remote_;
   result.ignore_items = ignore_items;
   return result;
 }

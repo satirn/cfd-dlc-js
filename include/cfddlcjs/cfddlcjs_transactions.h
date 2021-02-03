@@ -53,6 +53,9 @@ class DlcTransactionsApi {
       const CreateDlcTransactionsRequestStruct& request);
   static CreateCetAdaptorSignatureResponseStruct CreateCetAdaptorSignature(
       const CreateCetAdaptorSignatureRequestStruct& request);
+  static CreateCetAdaptorSignatureResponseStruct
+  CreateCetAdaptorSignatureMultiOracle(
+      const CreateCetAdaptorSignatureMultiOracleRequestStruct& request);
   static CreateCetAdaptorSignaturesResponseStruct CreateCetAdaptorSignatures(
       const CreateCetAdaptorSignaturesRequestStruct& request);
   static GetRawRefundTxSignatureResponseStruct GetRawRefundTxSignature(
@@ -60,6 +63,9 @@ class DlcTransactionsApi {
   static SignCetResponseStruct SignCet(const SignCetRequestStruct& request);
   static VerifyCetAdaptorSignatureResponseStruct VerifyCetAdaptorSignature(
       const VerifyCetAdaptorSignatureRequestStruct& request);
+  static VerifyCetAdaptorSignatureResponseStruct
+  VerifyCetAdaptorSignatureMultiOracle(
+      const VerifyCetAdaptorSignatureMultiOracleRequestStruct& request);
   static VerifyCetAdaptorSignaturesResponseStruct VerifyCetAdaptorSignatures(
       const VerifyCetAdaptorSignaturesRequestStruct& request);
   static AddSignaturesToRefundTxResponseStruct AddSignaturesToRefundTx(
@@ -77,6 +83,7 @@ class DlcTransactionsApi {
   static std::vector<ByteData256> HashMessages(std::vector<std::string> input);
   static std::vector<std::vector<ByteData256>> HashMessages(
       std::vector<MessagesStruct> input);
+  static Pubkey ComputeAdaptorPoint(std::vector<OracleInfoStruct> input);
 };
 
 }  // namespace api

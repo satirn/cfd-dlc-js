@@ -353,6 +353,240 @@ class Messages
 };
 
 // ------------------------------------------------------------------------
+// OracleInfo
+// ------------------------------------------------------------------------
+/**
+ * @brief JSON-API (OracleInfo) class
+ */
+class OracleInfo
+  : public cfd::core::JsonClassBase<OracleInfo> {
+ public:
+  OracleInfo() {
+    CollectFieldName();
+  }
+  virtual ~OracleInfo() {
+    // do nothing
+  }
+  /**
+   * @brief collect field name.
+   */
+  static void CollectFieldName();
+
+  /**
+   * @brief Get of oraclePubkey
+   * @return oraclePubkey
+   */
+  std::string GetOraclePubkey() const {
+    return oracle_pubkey_;
+  }
+  /**
+   * @brief Set to oraclePubkey
+   * @param[in] oracle_pubkey    setting value.
+   */
+  void SetOraclePubkey(  // line separate
+    const std::string& oracle_pubkey) {  // NOLINT
+    this->oracle_pubkey_ = oracle_pubkey;
+  }
+  /**
+   * @brief Get data type of oraclePubkey
+   * @return Data type of oraclePubkey
+   */
+  static std::string GetOraclePubkeyFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of oraclePubkey field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetOraclePubkeyString(  // line separate
+      const OracleInfo& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.oracle_pubkey_);
+  }
+  /**
+   * @brief Set json object to oraclePubkey field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetOraclePubkeyString(  // line separate
+      OracleInfo& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.oracle_pubkey_, json_value);
+  }
+
+  /**
+   * @brief Get of oracleRValues.
+   * @return oracleRValues
+   */
+  JsonValueVector<std::string>& GetOracleRValues() {  // NOLINT
+    return oracle_r_values_;
+  }
+  /**
+   * @brief Set to oracleRValues.
+   * @param[in] oracle_r_values    setting value.
+   */
+  void SetOracleRValues(  // line separate
+      const JsonValueVector<std::string>& oracle_r_values) {  // NOLINT
+    this->oracle_r_values_ = oracle_r_values;
+  }
+  /**
+   * @brief Get data type of oracleRValues.
+   * @return Data type of oracleRValues.
+   */
+  static std::string GetOracleRValuesFieldType() {
+    return "JsonValueVector<std::string>";  // NOLINT
+  }
+  /**
+   * @brief Get json string of oracleRValues field.
+   * @param[in,out] obj     class object
+   * @return JSON string.
+   */
+  static std::string GetOracleRValuesString(  // line separate
+      const OracleInfo& obj) {  // NOLINT
+    // Do not set to const, because substitution of member variables
+    // may occur in pre / post processing inside Serialize
+    return obj.oracle_r_values_.Serialize();
+  }
+  /**
+   * @brief Set json object to oracleRValues field.
+   * @param[in,out] obj     class object
+   * @param[in] json_value  JSON object
+   */
+  static void SetOracleRValuesString(  // line separate
+      OracleInfo& obj,  // NOLINT
+      const UniValue& json_value) {
+    obj.oracle_r_values_.DeserializeUniValue(json_value);
+  }
+
+  /**
+   * @brief Get of messages.
+   * @return messages
+   */
+  JsonValueVector<std::string>& GetMessages() {  // NOLINT
+    return messages_;
+  }
+  /**
+   * @brief Set to messages.
+   * @param[in] messages    setting value.
+   */
+  void SetMessages(  // line separate
+      const JsonValueVector<std::string>& messages) {  // NOLINT
+    this->messages_ = messages;
+  }
+  /**
+   * @brief Get data type of messages.
+   * @return Data type of messages.
+   */
+  static std::string GetMessagesFieldType() {
+    return "JsonValueVector<std::string>";  // NOLINT
+  }
+  /**
+   * @brief Get json string of messages field.
+   * @param[in,out] obj     class object
+   * @return JSON string.
+   */
+  static std::string GetMessagesString(  // line separate
+      const OracleInfo& obj) {  // NOLINT
+    // Do not set to const, because substitution of member variables
+    // may occur in pre / post processing inside Serialize
+    return obj.messages_.Serialize();
+  }
+  /**
+   * @brief Set json object to messages field.
+   * @param[in,out] obj     class object
+   * @param[in] json_value  JSON object
+   */
+  static void SetMessagesString(  // line separate
+      OracleInfo& obj,  // NOLINT
+      const UniValue& json_value) {
+    obj.messages_.DeserializeUniValue(json_value);
+  }
+
+  /**
+   * @brief Set ignore item.
+   * @param[in] key   ignore target key name.
+   */
+  void SetIgnoreItem(const std::string& key) {
+    ignore_items.insert(key);
+  }
+
+  /**
+   * @brief Convert struct to class.
+   * @param[in] data   struct data.
+   */
+  void ConvertFromStruct(
+      const OracleInfoStruct& data);
+
+  /**
+   * @brief Convert class to struct.
+   * @return  struct data.
+   */
+  OracleInfoStruct ConvertToStruct()  const;
+
+ protected:
+  /**
+   * @brief definition type of Map table.
+   */
+  using OracleInfoMapTable =
+    cfd::core::JsonTableMap<OracleInfo>;
+
+  /**
+   * @brief Get JSON mapping object.
+   * @return JSON mapping object.
+   * @see cfd::core::JsonClassBase::GetJsonMapper()
+   */
+  virtual const OracleInfoMapTable& GetJsonMapper() const {  // NOLINT
+    return json_mapper;
+  }
+  /**
+   * @brief Get item lists of JSON mapping.
+   * Fetch a list of target variable names in the order of definition.
+   * @return Item lists of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetJsonItemList()
+   */
+  virtual const std::vector<std::string>& GetJsonItemList() const {
+    return item_list;
+  }
+  /**
+   * @brief Get ignore item lists of JSON mapping.
+   * Ignore the target variable at Serialize.
+   * @return Item list of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetIgnoreItem()
+   */
+  virtual const std::set<std::string>& GetIgnoreItem() const {
+    return ignore_items;
+  }
+
+ private:
+ /**
+  * @brief JsonFunctionMap table
+  */
+  static OracleInfoMapTable json_mapper;
+  /**
+   * @brief field name list.
+   */
+  static std::vector<std::string> item_list;
+  /**
+   * @brief ignore item list.
+   */
+  std::set<std::string> ignore_items;
+
+  /**
+   * @brief JsonAPI(oraclePubkey) value
+   */
+  std::string oracle_pubkey_ = "";
+  /**
+   * @brief JsonAPI(oracleRValues) value
+   */
+  JsonValueVector<std::string> oracle_r_values_;  // NOLINT
+  /**
+   * @brief JsonAPI(messages) value
+   */
+  JsonValueVector<std::string> messages_;  // NOLINT
+};
+
+// ------------------------------------------------------------------------
 // AddSignatureToFundTransactionRequest
 // ------------------------------------------------------------------------
 /**
@@ -2726,6 +2960,474 @@ class CreateCetAdaptorSignatureResponse
    * @brief JsonAPI(proof) value
    */
   std::string proof_ = "";
+};
+
+// ------------------------------------------------------------------------
+// CreateCetAdaptorSignatureMultiOracleRequest
+// ------------------------------------------------------------------------
+/**
+ * @brief JSON-API (CreateCetAdaptorSignatureMultiOracleRequest) class
+ */
+class CreateCetAdaptorSignatureMultiOracleRequest
+  : public cfd::core::JsonClassBase<CreateCetAdaptorSignatureMultiOracleRequest> {
+ public:
+  CreateCetAdaptorSignatureMultiOracleRequest() {
+    CollectFieldName();
+  }
+  virtual ~CreateCetAdaptorSignatureMultiOracleRequest() {
+    // do nothing
+  }
+  /**
+   * @brief collect field name.
+   */
+  static void CollectFieldName();
+
+  /**
+   * @brief Get of cetHex
+   * @return cetHex
+   */
+  std::string GetCetHex() const {
+    return cet_hex_;
+  }
+  /**
+   * @brief Set to cetHex
+   * @param[in] cet_hex    setting value.
+   */
+  void SetCetHex(  // line separate
+    const std::string& cet_hex) {  // NOLINT
+    this->cet_hex_ = cet_hex;
+  }
+  /**
+   * @brief Get data type of cetHex
+   * @return Data type of cetHex
+   */
+  static std::string GetCetHexFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of cetHex field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetCetHexString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.cet_hex_);
+  }
+  /**
+   * @brief Set json object to cetHex field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetCetHexString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.cet_hex_, json_value);
+  }
+
+  /**
+   * @brief Get of privkey
+   * @return privkey
+   */
+  std::string GetPrivkey() const {
+    return privkey_;
+  }
+  /**
+   * @brief Set to privkey
+   * @param[in] privkey    setting value.
+   */
+  void SetPrivkey(  // line separate
+    const std::string& privkey) {  // NOLINT
+    this->privkey_ = privkey;
+  }
+  /**
+   * @brief Get data type of privkey
+   * @return Data type of privkey
+   */
+  static std::string GetPrivkeyFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of privkey field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetPrivkeyString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.privkey_);
+  }
+  /**
+   * @brief Set json object to privkey field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetPrivkeyString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.privkey_, json_value);
+  }
+
+  /**
+   * @brief Get of fundTxId
+   * @return fundTxId
+   */
+  std::string GetFundTxId() const {
+    return fund_tx_id_;
+  }
+  /**
+   * @brief Set to fundTxId
+   * @param[in] fund_tx_id    setting value.
+   */
+  void SetFundTxId(  // line separate
+    const std::string& fund_tx_id) {  // NOLINT
+    this->fund_tx_id_ = fund_tx_id;
+  }
+  /**
+   * @brief Get data type of fundTxId
+   * @return Data type of fundTxId
+   */
+  static std::string GetFundTxIdFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of fundTxId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundTxIdString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_tx_id_);
+  }
+  /**
+   * @brief Set json object to fundTxId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundTxIdString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_tx_id_, json_value);
+  }
+
+  /**
+   * @brief Get of fundVout
+   * @return fundVout
+   */
+  uint32_t GetFundVout() const {
+    return fund_vout_;
+  }
+  /**
+   * @brief Set to fundVout
+   * @param[in] fund_vout    setting value.
+   */
+  void SetFundVout(  // line separate
+    const uint32_t& fund_vout) {  // NOLINT
+    this->fund_vout_ = fund_vout;
+  }
+  /**
+   * @brief Get data type of fundVout
+   * @return Data type of fundVout
+   */
+  static std::string GetFundVoutFieldType() {
+    return "uint32_t";
+  }
+  /**
+   * @brief Get json string of fundVout field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundVoutString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_vout_);
+  }
+  /**
+   * @brief Set json object to fundVout field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundVoutString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_vout_, json_value);
+  }
+
+  /**
+   * @brief Get of localFundPubkey
+   * @return localFundPubkey
+   */
+  std::string GetLocalFundPubkey() const {
+    return local_fund_pubkey_;
+  }
+  /**
+   * @brief Set to localFundPubkey
+   * @param[in] local_fund_pubkey    setting value.
+   */
+  void SetLocalFundPubkey(  // line separate
+    const std::string& local_fund_pubkey) {  // NOLINT
+    this->local_fund_pubkey_ = local_fund_pubkey;
+  }
+  /**
+   * @brief Get data type of localFundPubkey
+   * @return Data type of localFundPubkey
+   */
+  static std::string GetLocalFundPubkeyFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of localFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLocalFundPubkeyString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.local_fund_pubkey_);
+  }
+  /**
+   * @brief Set json object to localFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLocalFundPubkeyString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.local_fund_pubkey_, json_value);
+  }
+
+  /**
+   * @brief Get of remoteFundPubkey
+   * @return remoteFundPubkey
+   */
+  std::string GetRemoteFundPubkey() const {
+    return remote_fund_pubkey_;
+  }
+  /**
+   * @brief Set to remoteFundPubkey
+   * @param[in] remote_fund_pubkey    setting value.
+   */
+  void SetRemoteFundPubkey(  // line separate
+    const std::string& remote_fund_pubkey) {  // NOLINT
+    this->remote_fund_pubkey_ = remote_fund_pubkey;
+  }
+  /**
+   * @brief Get data type of remoteFundPubkey
+   * @return Data type of remoteFundPubkey
+   */
+  static std::string GetRemoteFundPubkeyFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of remoteFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRemoteFundPubkeyString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.remote_fund_pubkey_);
+  }
+  /**
+   * @brief Set json object to remoteFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRemoteFundPubkeyString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.remote_fund_pubkey_, json_value);
+  }
+
+  /**
+   * @brief Get of oracleInfos.
+   * @return oracleInfos
+   */
+  JsonObjectVector<OracleInfo, OracleInfoStruct>& GetOracleInfos() {  // NOLINT
+    return oracle_infos_;
+  }
+  /**
+   * @brief Set to oracleInfos.
+   * @param[in] oracle_infos    setting value.
+   */
+  void SetOracleInfos(  // line separate
+      const JsonObjectVector<OracleInfo, OracleInfoStruct>& oracle_infos) {  // NOLINT
+    this->oracle_infos_ = oracle_infos;
+  }
+  /**
+   * @brief Get data type of oracleInfos.
+   * @return Data type of oracleInfos.
+   */
+  static std::string GetOracleInfosFieldType() {
+    return "JsonObjectVector<OracleInfo, OracleInfoStruct>";  // NOLINT
+  }
+  /**
+   * @brief Get json string of oracleInfos field.
+   * @param[in,out] obj     class object
+   * @return JSON string.
+   */
+  static std::string GetOracleInfosString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    // Do not set to const, because substitution of member variables
+    // may occur in pre / post processing inside Serialize
+    return obj.oracle_infos_.Serialize();
+  }
+  /**
+   * @brief Set json object to oracleInfos field.
+   * @param[in,out] obj     class object
+   * @param[in] json_value  JSON object
+   */
+  static void SetOracleInfosString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    obj.oracle_infos_.DeserializeUniValue(json_value);
+  }
+
+  /**
+   * @brief Get of fundInputAmount
+   * @return fundInputAmount
+   */
+  uint64_t GetFundInputAmount() const {
+    return fund_input_amount_;
+  }
+  /**
+   * @brief Set to fundInputAmount
+   * @param[in] fund_input_amount    setting value.
+   */
+  void SetFundInputAmount(  // line separate
+    const uint64_t& fund_input_amount) {  // NOLINT
+    this->fund_input_amount_ = fund_input_amount;
+  }
+  /**
+   * @brief Get data type of fundInputAmount
+   * @return Data type of fundInputAmount
+   */
+  static std::string GetFundInputAmountFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of fundInputAmount field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundInputAmountString(  // line separate
+      const CreateCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_input_amount_);
+  }
+  /**
+   * @brief Set json object to fundInputAmount field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundInputAmountString(  // line separate
+      CreateCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_input_amount_, json_value);
+  }
+
+  /**
+   * @brief Set ignore item.
+   * @param[in] key   ignore target key name.
+   */
+  void SetIgnoreItem(const std::string& key) {
+    ignore_items.insert(key);
+  }
+
+  /**
+   * @brief Convert struct to class.
+   * @param[in] data   struct data.
+   */
+  void ConvertFromStruct(
+      const CreateCetAdaptorSignatureMultiOracleRequestStruct& data);
+
+  /**
+   * @brief Convert class to struct.
+   * @return  struct data.
+   */
+  CreateCetAdaptorSignatureMultiOracleRequestStruct ConvertToStruct()  const;
+
+ protected:
+  /**
+   * @brief definition type of Map table.
+   */
+  using CreateCetAdaptorSignatureMultiOracleRequestMapTable =
+    cfd::core::JsonTableMap<CreateCetAdaptorSignatureMultiOracleRequest>;
+
+  /**
+   * @brief Get JSON mapping object.
+   * @return JSON mapping object.
+   * @see cfd::core::JsonClassBase::GetJsonMapper()
+   */
+  virtual const CreateCetAdaptorSignatureMultiOracleRequestMapTable& GetJsonMapper() const {  // NOLINT
+    return json_mapper;
+  }
+  /**
+   * @brief Get item lists of JSON mapping.
+   * Fetch a list of target variable names in the order of definition.
+   * @return Item lists of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetJsonItemList()
+   */
+  virtual const std::vector<std::string>& GetJsonItemList() const {
+    return item_list;
+  }
+  /**
+   * @brief Get ignore item lists of JSON mapping.
+   * Ignore the target variable at Serialize.
+   * @return Item list of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetIgnoreItem()
+   */
+  virtual const std::set<std::string>& GetIgnoreItem() const {
+    return ignore_items;
+  }
+
+ private:
+ /**
+  * @brief JsonFunctionMap table
+  */
+  static CreateCetAdaptorSignatureMultiOracleRequestMapTable json_mapper;
+  /**
+   * @brief field name list.
+   */
+  static std::vector<std::string> item_list;
+  /**
+   * @brief ignore item list.
+   */
+  std::set<std::string> ignore_items;
+
+  /**
+   * @brief JsonAPI(cetHex) value
+   */
+  std::string cet_hex_ = "";
+  /**
+   * @brief JsonAPI(privkey) value
+   */
+  std::string privkey_ = "";
+  /**
+   * @brief JsonAPI(fundTxId) value
+   */
+  std::string fund_tx_id_ = "";
+  /**
+   * @brief JsonAPI(fundVout) value
+   */
+  uint32_t fund_vout_ = 0;
+  /**
+   * @brief JsonAPI(localFundPubkey) value
+   */
+  std::string local_fund_pubkey_ = "";
+  /**
+   * @brief JsonAPI(remoteFundPubkey) value
+   */
+  std::string remote_fund_pubkey_ = "";
+  /**
+   * @brief JsonAPI(oracleInfos) value
+   */
+  JsonObjectVector<OracleInfo, OracleInfoStruct> oracle_infos_;  // NOLINT
+  /**
+   * @brief JsonAPI(fundInputAmount) value
+   */
+  uint64_t fund_input_amount_ = 0;
 };
 
 // ------------------------------------------------------------------------
@@ -10038,6 +10740,568 @@ class VerifyCetAdaptorSignatureResponse
    * @brief JsonAPI(valid) value
    */
   bool valid_ = false;
+};
+
+// ------------------------------------------------------------------------
+// VerifyCetAdaptorSignatureMultiOracleRequest
+// ------------------------------------------------------------------------
+/**
+ * @brief JSON-API (VerifyCetAdaptorSignatureMultiOracleRequest) class
+ */
+class VerifyCetAdaptorSignatureMultiOracleRequest
+  : public cfd::core::JsonClassBase<VerifyCetAdaptorSignatureMultiOracleRequest> {
+ public:
+  VerifyCetAdaptorSignatureMultiOracleRequest() {
+    CollectFieldName();
+  }
+  virtual ~VerifyCetAdaptorSignatureMultiOracleRequest() {
+    // do nothing
+  }
+  /**
+   * @brief collect field name.
+   */
+  static void CollectFieldName();
+
+  /**
+   * @brief Get of cetHex
+   * @return cetHex
+   */
+  std::string GetCetHex() const {
+    return cet_hex_;
+  }
+  /**
+   * @brief Set to cetHex
+   * @param[in] cet_hex    setting value.
+   */
+  void SetCetHex(  // line separate
+    const std::string& cet_hex) {  // NOLINT
+    this->cet_hex_ = cet_hex;
+  }
+  /**
+   * @brief Get data type of cetHex
+   * @return Data type of cetHex
+   */
+  static std::string GetCetHexFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of cetHex field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetCetHexString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.cet_hex_);
+  }
+  /**
+   * @brief Set json object to cetHex field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetCetHexString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.cet_hex_, json_value);
+  }
+
+  /**
+   * @brief Get of adaptorSignature
+   * @return adaptorSignature
+   */
+  std::string GetAdaptorSignature() const {
+    return adaptor_signature_;
+  }
+  /**
+   * @brief Set to adaptorSignature
+   * @param[in] adaptor_signature    setting value.
+   */
+  void SetAdaptorSignature(  // line separate
+    const std::string& adaptor_signature) {  // NOLINT
+    this->adaptor_signature_ = adaptor_signature;
+  }
+  /**
+   * @brief Get data type of adaptorSignature
+   * @return Data type of adaptorSignature
+   */
+  static std::string GetAdaptorSignatureFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of adaptorSignature field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetAdaptorSignatureString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.adaptor_signature_);
+  }
+  /**
+   * @brief Set json object to adaptorSignature field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetAdaptorSignatureString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.adaptor_signature_, json_value);
+  }
+
+  /**
+   * @brief Get of adaptorProof
+   * @return adaptorProof
+   */
+  std::string GetAdaptorProof() const {
+    return adaptor_proof_;
+  }
+  /**
+   * @brief Set to adaptorProof
+   * @param[in] adaptor_proof    setting value.
+   */
+  void SetAdaptorProof(  // line separate
+    const std::string& adaptor_proof) {  // NOLINT
+    this->adaptor_proof_ = adaptor_proof;
+  }
+  /**
+   * @brief Get data type of adaptorProof
+   * @return Data type of adaptorProof
+   */
+  static std::string GetAdaptorProofFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of adaptorProof field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetAdaptorProofString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.adaptor_proof_);
+  }
+  /**
+   * @brief Set json object to adaptorProof field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetAdaptorProofString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.adaptor_proof_, json_value);
+  }
+
+  /**
+   * @brief Get of oracleInfos.
+   * @return oracleInfos
+   */
+  JsonObjectVector<OracleInfo, OracleInfoStruct>& GetOracleInfos() {  // NOLINT
+    return oracle_infos_;
+  }
+  /**
+   * @brief Set to oracleInfos.
+   * @param[in] oracle_infos    setting value.
+   */
+  void SetOracleInfos(  // line separate
+      const JsonObjectVector<OracleInfo, OracleInfoStruct>& oracle_infos) {  // NOLINT
+    this->oracle_infos_ = oracle_infos;
+  }
+  /**
+   * @brief Get data type of oracleInfos.
+   * @return Data type of oracleInfos.
+   */
+  static std::string GetOracleInfosFieldType() {
+    return "JsonObjectVector<OracleInfo, OracleInfoStruct>";  // NOLINT
+  }
+  /**
+   * @brief Get json string of oracleInfos field.
+   * @param[in,out] obj     class object
+   * @return JSON string.
+   */
+  static std::string GetOracleInfosString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    // Do not set to const, because substitution of member variables
+    // may occur in pre / post processing inside Serialize
+    return obj.oracle_infos_.Serialize();
+  }
+  /**
+   * @brief Set json object to oracleInfos field.
+   * @param[in,out] obj     class object
+   * @param[in] json_value  JSON object
+   */
+  static void SetOracleInfosString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    obj.oracle_infos_.DeserializeUniValue(json_value);
+  }
+
+  /**
+   * @brief Get of localFundPubkey
+   * @return localFundPubkey
+   */
+  std::string GetLocalFundPubkey() const {
+    return local_fund_pubkey_;
+  }
+  /**
+   * @brief Set to localFundPubkey
+   * @param[in] local_fund_pubkey    setting value.
+   */
+  void SetLocalFundPubkey(  // line separate
+    const std::string& local_fund_pubkey) {  // NOLINT
+    this->local_fund_pubkey_ = local_fund_pubkey;
+  }
+  /**
+   * @brief Get data type of localFundPubkey
+   * @return Data type of localFundPubkey
+   */
+  static std::string GetLocalFundPubkeyFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of localFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLocalFundPubkeyString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.local_fund_pubkey_);
+  }
+  /**
+   * @brief Set json object to localFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLocalFundPubkeyString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.local_fund_pubkey_, json_value);
+  }
+
+  /**
+   * @brief Get of remoteFundPubkey
+   * @return remoteFundPubkey
+   */
+  std::string GetRemoteFundPubkey() const {
+    return remote_fund_pubkey_;
+  }
+  /**
+   * @brief Set to remoteFundPubkey
+   * @param[in] remote_fund_pubkey    setting value.
+   */
+  void SetRemoteFundPubkey(  // line separate
+    const std::string& remote_fund_pubkey) {  // NOLINT
+    this->remote_fund_pubkey_ = remote_fund_pubkey;
+  }
+  /**
+   * @brief Get data type of remoteFundPubkey
+   * @return Data type of remoteFundPubkey
+   */
+  static std::string GetRemoteFundPubkeyFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of remoteFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRemoteFundPubkeyString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.remote_fund_pubkey_);
+  }
+  /**
+   * @brief Set json object to remoteFundPubkey field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRemoteFundPubkeyString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.remote_fund_pubkey_, json_value);
+  }
+
+  /**
+   * @brief Get of fundTxId
+   * @return fundTxId
+   */
+  std::string GetFundTxId() const {
+    return fund_tx_id_;
+  }
+  /**
+   * @brief Set to fundTxId
+   * @param[in] fund_tx_id    setting value.
+   */
+  void SetFundTxId(  // line separate
+    const std::string& fund_tx_id) {  // NOLINT
+    this->fund_tx_id_ = fund_tx_id;
+  }
+  /**
+   * @brief Get data type of fundTxId
+   * @return Data type of fundTxId
+   */
+  static std::string GetFundTxIdFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of fundTxId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundTxIdString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_tx_id_);
+  }
+  /**
+   * @brief Set json object to fundTxId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundTxIdString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_tx_id_, json_value);
+  }
+
+  /**
+   * @brief Get of fundVout
+   * @return fundVout
+   */
+  uint32_t GetFundVout() const {
+    return fund_vout_;
+  }
+  /**
+   * @brief Set to fundVout
+   * @param[in] fund_vout    setting value.
+   */
+  void SetFundVout(  // line separate
+    const uint32_t& fund_vout) {  // NOLINT
+    this->fund_vout_ = fund_vout;
+  }
+  /**
+   * @brief Get data type of fundVout
+   * @return Data type of fundVout
+   */
+  static std::string GetFundVoutFieldType() {
+    return "uint32_t";
+  }
+  /**
+   * @brief Get json string of fundVout field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundVoutString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_vout_);
+  }
+  /**
+   * @brief Set json object to fundVout field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundVoutString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_vout_, json_value);
+  }
+
+  /**
+   * @brief Get of fundInputAmount
+   * @return fundInputAmount
+   */
+  uint64_t GetFundInputAmount() const {
+    return fund_input_amount_;
+  }
+  /**
+   * @brief Set to fundInputAmount
+   * @param[in] fund_input_amount    setting value.
+   */
+  void SetFundInputAmount(  // line separate
+    const uint64_t& fund_input_amount) {  // NOLINT
+    this->fund_input_amount_ = fund_input_amount;
+  }
+  /**
+   * @brief Get data type of fundInputAmount
+   * @return Data type of fundInputAmount
+   */
+  static std::string GetFundInputAmountFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of fundInputAmount field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundInputAmountString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_input_amount_);
+  }
+  /**
+   * @brief Set json object to fundInputAmount field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundInputAmountString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_input_amount_, json_value);
+  }
+
+  /**
+   * @brief Get of verifyRemote
+   * @return verifyRemote
+   */
+  bool GetVerifyRemote() const {
+    return verify_remote_;
+  }
+  /**
+   * @brief Set to verifyRemote
+   * @param[in] verify_remote    setting value.
+   */
+  void SetVerifyRemote(  // line separate
+    const bool& verify_remote) {  // NOLINT
+    this->verify_remote_ = verify_remote;
+  }
+  /**
+   * @brief Get data type of verifyRemote
+   * @return Data type of verifyRemote
+   */
+  static std::string GetVerifyRemoteFieldType() {
+    return "bool";
+  }
+  /**
+   * @brief Get json string of verifyRemote field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetVerifyRemoteString(  // line separate
+      const VerifyCetAdaptorSignatureMultiOracleRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.verify_remote_);
+  }
+  /**
+   * @brief Set json object to verifyRemote field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetVerifyRemoteString(  // line separate
+      VerifyCetAdaptorSignatureMultiOracleRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.verify_remote_, json_value);
+  }
+
+  /**
+   * @brief Set ignore item.
+   * @param[in] key   ignore target key name.
+   */
+  void SetIgnoreItem(const std::string& key) {
+    ignore_items.insert(key);
+  }
+
+  /**
+   * @brief Convert struct to class.
+   * @param[in] data   struct data.
+   */
+  void ConvertFromStruct(
+      const VerifyCetAdaptorSignatureMultiOracleRequestStruct& data);
+
+  /**
+   * @brief Convert class to struct.
+   * @return  struct data.
+   */
+  VerifyCetAdaptorSignatureMultiOracleRequestStruct ConvertToStruct()  const;
+
+ protected:
+  /**
+   * @brief definition type of Map table.
+   */
+  using VerifyCetAdaptorSignatureMultiOracleRequestMapTable =
+    cfd::core::JsonTableMap<VerifyCetAdaptorSignatureMultiOracleRequest>;
+
+  /**
+   * @brief Get JSON mapping object.
+   * @return JSON mapping object.
+   * @see cfd::core::JsonClassBase::GetJsonMapper()
+   */
+  virtual const VerifyCetAdaptorSignatureMultiOracleRequestMapTable& GetJsonMapper() const {  // NOLINT
+    return json_mapper;
+  }
+  /**
+   * @brief Get item lists of JSON mapping.
+   * Fetch a list of target variable names in the order of definition.
+   * @return Item lists of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetJsonItemList()
+   */
+  virtual const std::vector<std::string>& GetJsonItemList() const {
+    return item_list;
+  }
+  /**
+   * @brief Get ignore item lists of JSON mapping.
+   * Ignore the target variable at Serialize.
+   * @return Item list of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetIgnoreItem()
+   */
+  virtual const std::set<std::string>& GetIgnoreItem() const {
+    return ignore_items;
+  }
+
+ private:
+ /**
+  * @brief JsonFunctionMap table
+  */
+  static VerifyCetAdaptorSignatureMultiOracleRequestMapTable json_mapper;
+  /**
+   * @brief field name list.
+   */
+  static std::vector<std::string> item_list;
+  /**
+   * @brief ignore item list.
+   */
+  std::set<std::string> ignore_items;
+
+  /**
+   * @brief JsonAPI(cetHex) value
+   */
+  std::string cet_hex_ = "";
+  /**
+   * @brief JsonAPI(adaptorSignature) value
+   */
+  std::string adaptor_signature_ = "";
+  /**
+   * @brief JsonAPI(adaptorProof) value
+   */
+  std::string adaptor_proof_ = "";
+  /**
+   * @brief JsonAPI(oracleInfos) value
+   */
+  JsonObjectVector<OracleInfo, OracleInfoStruct> oracle_infos_;  // NOLINT
+  /**
+   * @brief JsonAPI(localFundPubkey) value
+   */
+  std::string local_fund_pubkey_ = "";
+  /**
+   * @brief JsonAPI(remoteFundPubkey) value
+   */
+  std::string remote_fund_pubkey_ = "";
+  /**
+   * @brief JsonAPI(fundTxId) value
+   */
+  std::string fund_tx_id_ = "";
+  /**
+   * @brief JsonAPI(fundVout) value
+   */
+  uint32_t fund_vout_ = 0;
+  /**
+   * @brief JsonAPI(fundInputAmount) value
+   */
+  uint64_t fund_input_amount_ = 0;
+  /**
+   * @brief JsonAPI(verifyRemote) value
+   */
+  bool verify_remote_ = true;
 };
 
 // ------------------------------------------------------------------------

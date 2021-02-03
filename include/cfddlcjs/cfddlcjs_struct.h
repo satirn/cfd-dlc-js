@@ -56,6 +56,19 @@ struct MessagesStruct {
 };
 
 // ------------------------------------------------------------------------
+// OracleInfoStruct
+// ------------------------------------------------------------------------
+/**
+ * @brief OracleInfoStruct struct
+ */
+struct OracleInfoStruct {
+  std::string oracle_pubkey = "";            //!< oracle_pubkey  // NOLINT
+  std::vector<std::string> oracle_r_values;  //!< oracle_r_values  // NOLINT
+  std::vector<std::string> messages;         //!< messages  // NOLINT
+  std::set<std::string> ignore_items;   //!< using on JSON mapping convert.
+};
+
+// ------------------------------------------------------------------------
 // AddSignatureToFundTransactionRequestStruct
 // ------------------------------------------------------------------------
 /**
@@ -171,6 +184,24 @@ struct CreateCetAdaptorSignatureResponseStruct {
   std::string signature = "";  //!< signature  // NOLINT
   std::string proof = "";      //!< proof  // NOLINT
   cfd::dlc::js::api::InnerErrorResponseStruct error;   //!< error information
+  std::set<std::string> ignore_items;   //!< using on JSON mapping convert.
+};
+
+// ------------------------------------------------------------------------
+// CreateCetAdaptorSignatureMultiOracleRequestStruct
+// ------------------------------------------------------------------------
+/**
+ * @brief CreateCetAdaptorSignatureMultiOracleRequestStruct struct
+ */
+struct CreateCetAdaptorSignatureMultiOracleRequestStruct {
+  std::string cet_hex = "";                    //!< cet_hex  // NOLINT
+  std::string privkey = "";                    //!< privkey  // NOLINT
+  std::string fund_tx_id = "";                 //!< fund_tx_id  // NOLINT
+  uint32_t fund_vout = 0;                      //!< fund_vout  // NOLINT
+  std::string local_fund_pubkey = "";          //!< local_fund_pubkey  // NOLINT
+  std::string remote_fund_pubkey = "";         //!< remote_fund_pubkey  // NOLINT
+  std::vector<OracleInfoStruct> oracle_infos;  //!< oracle_infos  // NOLINT
+  uint64_t fund_input_amount = 0;              //!< fund_input_amount  // NOLINT
   std::set<std::string> ignore_items;   //!< using on JSON mapping convert.
 };
 
@@ -505,6 +536,26 @@ struct VerifyCetAdaptorSignatureRequestStruct {
 struct VerifyCetAdaptorSignatureResponseStruct {
   bool valid = false;  //!< valid  // NOLINT
   cfd::dlc::js::api::InnerErrorResponseStruct error;   //!< error information
+  std::set<std::string> ignore_items;   //!< using on JSON mapping convert.
+};
+
+// ------------------------------------------------------------------------
+// VerifyCetAdaptorSignatureMultiOracleRequestStruct
+// ------------------------------------------------------------------------
+/**
+ * @brief VerifyCetAdaptorSignatureMultiOracleRequestStruct struct
+ */
+struct VerifyCetAdaptorSignatureMultiOracleRequestStruct {
+  std::string cet_hex = "";                    //!< cet_hex  // NOLINT
+  std::string adaptor_signature = "";          //!< adaptor_signature  // NOLINT
+  std::string adaptor_proof = "";              //!< adaptor_proof  // NOLINT
+  std::vector<OracleInfoStruct> oracle_infos;  //!< oracle_infos  // NOLINT
+  std::string local_fund_pubkey = "";          //!< local_fund_pubkey  // NOLINT
+  std::string remote_fund_pubkey = "";         //!< remote_fund_pubkey  // NOLINT
+  std::string fund_tx_id = "";                 //!< fund_tx_id  // NOLINT
+  uint32_t fund_vout = 0;                      //!< fund_vout  // NOLINT
+  uint64_t fund_input_amount = 0;              //!< fund_input_amount  // NOLINT
+  bool verify_remote = true;                   //!< verify_remote  // NOLINT
   std::set<std::string> ignore_items;   //!< using on JSON mapping convert.
 };
 

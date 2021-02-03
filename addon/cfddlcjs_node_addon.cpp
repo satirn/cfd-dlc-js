@@ -129,6 +129,11 @@ Value CreateCetAdaptorSignature(const CallbackInfo &information) {
                           JsonMappingApi::CreateCetAdaptorSignature);
 }
 
+Value CreateCetAdaptorSignatureMultiOracle(const CallbackInfo &information) {
+  return NodeAddonJsonApi(information,
+                          JsonMappingApi::CreateCetAdaptorSignatureMultiOracle);
+}
+
 Value CreateCetAdaptorSignatures(const CallbackInfo &information) {
   return NodeAddonJsonApi(information,
                           JsonMappingApi::CreateCetAdaptorSignatures);
@@ -141,6 +146,11 @@ Value SignCet(const CallbackInfo &information) {
 Value VerifyCetAdaptorSignature(const CallbackInfo &information) {
   return NodeAddonJsonApi(information,
                           JsonMappingApi::VerifyCetAdaptorSignature);
+}
+
+Value VerifyCetAdaptorSignatureMultiOracle(const CallbackInfo &information) {
+  return NodeAddonJsonApi(information,
+                          JsonMappingApi::VerifyCetAdaptorSignatureMultiOracle);
 }
 
 Value VerifyCetAdaptorSignatures(const CallbackInfo &information) {
@@ -184,11 +194,15 @@ void InitializeJsonApi(Env env, Object *exports) {
                Function::New(env, CreateDlcTransactions));
   exports->Set(String::New(env, "CreateCetAdaptorSignature"),
                Function::New(env, CreateCetAdaptorSignature));
+  exports->Set(String::New(env, "CreateCetAdaptorSignatureMultiOracle"),
+               Function::New(env, CreateCetAdaptorSignatureMultiOracle));
   exports->Set(String::New(env, "CreateCetAdaptorSignatures"),
                Function::New(env, CreateCetAdaptorSignatures));
   exports->Set(String::New(env, "SignCet"), Function::New(env, SignCet));
   exports->Set(String::New(env, "VerifyCetAdaptorSignature"),
                Function::New(env, VerifyCetAdaptorSignature));
+  exports->Set(String::New(env, "VerifyCetAdaptorSignatureMultiOracle"),
+               Function::New(env, VerifyCetAdaptorSignatureMultiOracle));
   exports->Set(String::New(env, "VerifyCetAdaptorSignatures"),
                Function::New(env, VerifyCetAdaptorSignatures));
   exports->Set(String::New(env, "GetRawRefundTxSignature"),

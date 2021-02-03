@@ -161,6 +161,16 @@ std::string JsonMappingApi::CreateCetAdaptorSignature(
       request_message, DlcTransactionsApi::CreateCetAdaptorSignature);
 }
 
+std::string JsonMappingApi::CreateCetAdaptorSignatureMultiOracle(
+    const std::string &request_message) {
+  return ExecuteJsonApi<api::json::CreateCetAdaptorSignatureMultiOracleRequest,
+                        api::json::CreateCetAdaptorSignatureResponse,
+                        api::CreateCetAdaptorSignatureMultiOracleRequestStruct,
+                        api::CreateCetAdaptorSignatureResponseStruct>(
+      request_message,
+      DlcTransactionsApi::CreateCetAdaptorSignatureMultiOracle);
+}
+
 std::string JsonMappingApi::CreateCetAdaptorSignatures(
     const std::string &request_message) {
   return ExecuteJsonApi<api::json::CreateCetAdaptorSignaturesRequest,
@@ -183,6 +193,16 @@ std::string JsonMappingApi::VerifyCetAdaptorSignature(
                         api::VerifyCetAdaptorSignatureRequestStruct,
                         api::VerifyCetAdaptorSignatureResponseStruct>(
       request_message, DlcTransactionsApi::VerifyCetAdaptorSignature);
+}
+
+std::string JsonMappingApi::VerifyCetAdaptorSignatureMultiOracle(
+    const std::string &request_message) {
+  return ExecuteJsonApi<api::json::VerifyCetAdaptorSignatureMultiOracleRequest,
+                        api::json::VerifyCetAdaptorSignatureResponse,
+                        api::VerifyCetAdaptorSignatureMultiOracleRequestStruct,
+                        api::VerifyCetAdaptorSignatureResponseStruct>(
+      request_message,
+      DlcTransactionsApi::VerifyCetAdaptorSignatureMultiOracle);
 }
 
 std::string JsonMappingApi::VerifyCetAdaptorSignatures(

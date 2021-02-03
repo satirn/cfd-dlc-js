@@ -46,10 +46,14 @@ class CFD_DLC_JS_API_EXPORT JsonMappingApi {
   static std::string CreateDlcTransactions(const std::string &request_message);
   static std::string CreateCetAdaptorSignature(
       const std::string &request_message);
+  static std::string CreateCetAdaptorSignatureMultiOracle(
+      const std::string &request_message);
   static std::string CreateCetAdaptorSignatures(
       const std::string &request_message);
   static std::string SignCet(const std::string &request_message);
   static std::string VerifyCetAdaptorSignature(
+      const std::string &request_message);
+  static std::string VerifyCetAdaptorSignatureMultiOracle(
       const std::string &request_message);
   static std::string VerifyCetAdaptorSignatures(
       const std::string &request_message);

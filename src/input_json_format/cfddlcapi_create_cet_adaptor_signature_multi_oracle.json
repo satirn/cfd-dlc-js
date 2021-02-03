@@ -1,0 +1,30 @@
+{
+  "namespace": ["cfd", "dlc", "js", "api", "json"],
+  "request": {
+    ":class": "CreateCetAdaptorSignatureMultiOracleRequest",
+    ":class:comment": "Create an adaptor signature using multiple oracles for a CET",
+    "cetHex": "",
+    "privkey": "",
+    "fundTxId": "",
+    "fundVout": 0,
+    "fundVout:type": "uint32_t",
+    "fundVout:require": "optional",
+    "localFundPubkey": "",
+    "remoteFundPubkey": "",
+    "oracleInfos": [
+      {
+        ":class": "OracleInfo",
+        "oraclePubkey": "",
+        "oracleRValues": [""],
+        "messages": [""]
+      }
+    ],
+    "fundInputAmount": 0,
+    "fundInputAmount:type": "uint64_t"
+  },
+  "response": {
+    ":class": "CreateCetAdaptorSignatureResponse",
+    "signature": "",
+    "proof": ""
+  }
+}

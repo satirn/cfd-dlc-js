@@ -20,11 +20,13 @@ namespace dlc {
 namespace js {
 namespace api {
 
+using cfd::core::AdaptorUtil;
 using cfd::core::ByteData256;
 using cfd::core::CfdError;
 using cfd::core::CfdException;
 using cfd::core::HashUtil;
 using cfd::core::Privkey;
+using cfd::core::SchnorrUtil;
 using cfd::core::Txid;
 using cfd::core::TxIn;
 using cfd::dlc::DlcManager;
@@ -402,6 +404,41 @@ DlcTransactionsApi::CreateCetAdaptorSignature(
   return result;
 }
 
+CreateCetAdaptorSignatureResponseStruct
+DlcTransactionsApi::CreateCetAdaptorSignatureMultiOracle(
+    const CreateCetAdaptorSignatureMultiOracleRequestStruct& request) {
+  auto call_func =
+      [](const CreateCetAdaptorSignatureMultiOracleRequestStruct& request)
+      -> CreateCetAdaptorSignatureResponseStruct {
+    CreateCetAdaptorSignatureResponseStruct response;
+    TransactionController cet(request.cet_hex);
+    Privkey privkey(request.privkey);
+    Pubkey local_fund_pubkey(request.local_fund_pubkey);
+    Pubkey remote_fund_pubkey(request.remote_fund_pubkey);
+
+    auto adaptor_point = ComputeAdaptorPoint(request.oracle_infos);
+    Txid fund_txid(request.fund_tx_id);
+    auto fund_input_amount =
+        Amount::CreateBySatoshiAmount(request.fund_input_amount);
+    auto fund_script = DlcManager::CreateFundTxLockingScript(
+        local_fund_pubkey, remote_fund_pubkey);
+
+    auto sig_hash = cet.GetTransaction().GetSignatureHash(
+        0, fund_script.GetData(), SigHashType(), fund_input_amount,
+        WitnessVersion::kVersion0);
+    auto adaptor_pair = AdaptorUtil::Sign(sig_hash, privkey, adaptor_point);
+
+    response.signature = adaptor_pair.signature.GetData().GetHex();
+    response.proof = adaptor_pair.proof.GetData().GetHex();
+    return response;
+  };
+  CreateCetAdaptorSignatureResponseStruct result;
+  result = ExecuteStructApi<CreateCetAdaptorSignatureMultiOracleRequestStruct,
+                            CreateCetAdaptorSignatureResponseStruct>(
+      request, call_func, std::string(__FUNCTION__));
+  return result;
+}
+
 CreateCetAdaptorSignaturesResponseStruct
 DlcTransactionsApi::CreateCetAdaptorSignatures(
     const CreateCetAdaptorSignaturesRequestStruct& request) {
@@ -564,6 +601,42 @@ DlcTransactionsApi::VerifyCetAdaptorSignature(
   return result;
 }
 
+VerifyCetAdaptorSignatureResponseStruct
+DlcTransactionsApi::VerifyCetAdaptorSignatureMultiOracle(
+    const VerifyCetAdaptorSignatureMultiOracleRequestStruct& request) {
+  auto call_func =
+      [](const VerifyCetAdaptorSignatureMultiOracleRequestStruct& request)
+      -> VerifyCetAdaptorSignatureResponseStruct {
+    VerifyCetAdaptorSignatureResponseStruct response;
+    TransactionController cet(request.cet_hex);
+    AdaptorSignature adaptor_signature(request.adaptor_signature);
+    AdaptorProof adaptor_proof(request.adaptor_proof);
+    Pubkey local_fund_pubkey(request.local_fund_pubkey);
+    Pubkey remote_fund_pubkey(request.remote_fund_pubkey);
+    auto adaptor_point = ComputeAdaptorPoint(request.oracle_infos);
+    auto pubkey =
+        request.verify_remote ? remote_fund_pubkey : local_fund_pubkey;
+    Txid fund_txid(request.fund_tx_id);
+    auto fund_input_amount =
+        Amount::CreateBySatoshiAmount(request.fund_input_amount);
+    auto fund_script = DlcManager::CreateFundTxLockingScript(
+        local_fund_pubkey, remote_fund_pubkey);
+
+    auto sig_hash = cet.GetTransaction().GetSignatureHash(
+        0, fund_script.GetData(), SigHashType(), fund_input_amount,
+        WitnessVersion::kVersion0);
+    response.valid = AdaptorUtil::Verify(adaptor_signature, adaptor_proof,
+                                         adaptor_point, sig_hash, pubkey);
+
+    return response;
+  };
+  VerifyCetAdaptorSignatureResponseStruct result;
+  result = ExecuteStructApi<VerifyCetAdaptorSignatureMultiOracleRequestStruct,
+                            VerifyCetAdaptorSignatureResponseStruct>(
+      request, call_func, std::string(__FUNCTION__));
+  return result;
+}
+
 GetRawRefundTxSignatureResponseStruct
 DlcTransactionsApi::GetRawRefundTxSignature(
     const GetRawRefundTxSignatureRequestStruct& request) {
@@ -644,6 +717,29 @@ DlcTransactionsApi::VerifyRefundTxSignature(
                             VerifyRefundTxSignatureResponseStruct>(
       request, call_func, std::string(__FUNCTION__));
   return result;
+}
+
+Pubkey DlcTransactionsApi::ComputeAdaptorPoint(
+    std::vector<OracleInfoStruct> oracle_infos) {
+  std::vector<Pubkey> adaptor_points;
+  for (auto oracle_info : oracle_infos) {
+    if (oracle_info.messages.size() != oracle_info.oracle_r_values.size()) {
+      throw CfdException(CfdError::kCfdIllegalArgumentError,
+                         "Different size for messages and nonces");
+    }
+
+    auto hashed_msgs = HashMessages(oracle_info.messages);
+    auto oracle_r_values = ParseSchnorrPubkeys(oracle_info.oracle_r_values);
+    SchnorrPubkey oracle_pubkey(oracle_info.oracle_pubkey);
+
+    for (auto i = 0; i < hashed_msgs.size(); i++) {
+      adaptor_points.push_back(SchnorrUtil::ComputeSigPoint(
+          hashed_msgs[i], oracle_r_values[i], oracle_pubkey));
+    }
+  }
+
+  return adaptor_points.size() > 1 ? Pubkey::CombinePubkey(adaptor_points)
+                                   : adaptor_points[0];
 }
 
 }  // namespace api
