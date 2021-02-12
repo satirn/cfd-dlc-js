@@ -46,6 +46,12 @@ class CFD_DLC_JS_API_EXPORT JsonMappingApi {
       RequestFunctionMap *request_map,
       ResponseOnlyFunctionMap *response_only_map);
 
+  /**
+   * @brief GetSupportedFunctionのJSON API関数(request, response).
+   * @return 戻り値(JSON文字列)
+   */
+  static std::string GetSupportedFunction();
+
   static std::string CreateFundTransaction(const std::string &request_message);
 
   static std::string SignFundTransaction(const std::string &request_message);
