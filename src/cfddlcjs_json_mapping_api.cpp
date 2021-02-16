@@ -285,6 +285,8 @@ void JsonMappingApi::LoadFunctions(
     request_map->emplace(
         "VerifyCetAdaptorSignature", JsonMappingApi::VerifyCetAdaptorSignature);
     request_map->emplace(
+        "VerifyCetAdaptorSignatures", JsonMappingApi::VerifyCetAdaptorSignatures);
+    request_map->emplace(
         "GetRawRefundTxSignature", JsonMappingApi::GetRawRefundTxSignature);
     request_map->emplace(
         "AddSignaturesToRefundTx", JsonMappingApi::AddSignaturesToRefundTx);
