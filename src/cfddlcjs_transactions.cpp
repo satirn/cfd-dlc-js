@@ -355,13 +355,13 @@ std::vector<ByteData256> DlcTransactionsApi::HashMessages(
   auto tagHash = HashUtil::Sha256("DLC/oracle/attestation/v0").GetBytes();
 
   for (int i = 0; i < input.size(); i++) {
-    std::vector<uint8_t> taggedHashed;
-    taggedHashed.reserve(tagHash.size() + tagHash.size() + input[i].size());
-    taggedHashed.insert(toHash.end(), tagHash.begin(), tagHash.end());
-    taggedHashed.insert(toHash.end(), tagHash.begin(), tagHash.end());
-    taggedHashed.insert(toHash.end(), input[i].begin(), input[i].end());
+    std::vector<uint8_t> toHash;
+    toHash.reserve(tagHash.size() + tagHash.size() + input[i].size());
+    toHash.insert(toHash.end(), tagHash.begin(), tagHash.end());
+    toHash.insert(toHash.end(), tagHash.begin(), tagHash.end());
+    toHash.insert(toHash.end(), input[i].begin(), input[i].end());
     
-    output[i] = HashUtil::Sha256(taggedHashed);
+    output[i] = HashUtil::Sha256(toHash);
   }
   return output;
 }
