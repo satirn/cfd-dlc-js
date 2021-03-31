@@ -352,8 +352,16 @@ std::vector<SchnorrSignature> DlcTransactionsApi::ParseSchnorrSignatures(
 std::vector<ByteData256> DlcTransactionsApi::HashMessages(
     std::vector<std::string> input) {
   std::vector<ByteData256> output(input.size());
+  auto tagHash = HashUtil::Sha256("DLC/oracle/attestation/v0").GetBytes();
+
   for (int i = 0; i < input.size(); i++) {
-    output[i] = HashUtil::Sha256(input[i]);
+    std::vector<uint8_t> taggedHashed;
+    taggedHashed.reserve(tagHash.size() + tagHash.size() + input[i].size());
+    taggedHashed.insert(toHash.end(), tagHash.begin(), tagHash.end());
+    taggedHashed.insert(toHash.end(), tagHash.begin(), tagHash.end());
+    taggedHashed.insert(toHash.end(), input[i].begin(), input[i].end());
+    
+    output[i] = HashUtil::Sha256(taggedHashed);
   }
   return output;
 }
