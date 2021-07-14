@@ -13,12 +13,22 @@ function GetRequest(
     remotePubkey: TestData.RemoteFundPubkey,
     outputAmount: TestData.FundInputAmount,
     feeRate: 1,
-    localInputs: TestData.LocalInputs,
+    localInputs: TestData.LocalInputs.map((input) => {
+      return {
+        ...input,
+        maxWitnessLength: 108,
+      }
+    }),
     localChange: {
       amount: localChange,
       address: TestData.LocalChangeAddress,
     },
-    remoteInputs: TestData.RemoteInputs,
+    remoteInputs: TestData.RemoteInputs.map((input) => {
+      return {
+        ...input,
+        maxWitnessLength: 108,
+      }
+    }),
     remoteChange: {
       amount: remoteChange,
       address: TestData.RemoteChangeAddress,

@@ -66,6 +66,10 @@ describe("Compatibility", () => {
         ),
         localCollateralAmount: testVector.inputs.offerParams.collateral,
         remoteCollateralAmount: testVector.inputs.acceptParams.collateral,
+        localPayoutSerialId: 0,
+        localChangeSerialId: 0,
+        remotePayoutSerialId: 0,
+        remoteChangeSerialId: 0,
         localChangeScriptPubkey: CfdUtils.GetAddressScript(
           testVector.inputs.offerParams.changeAddress
         ),
