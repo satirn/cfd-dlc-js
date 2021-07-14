@@ -103,6 +103,77 @@ MessagesStruct Messages::ConvertToStruct() const {  // NOLINT
 }
 
 // ------------------------------------------------------------------------
+// TxInInfoRequest
+// ------------------------------------------------------------------------
+cfd::core::JsonTableMap<TxInInfoRequest>
+  TxInInfoRequest::json_mapper;
+std::vector<std::string> TxInInfoRequest::item_list;
+
+void TxInInfoRequest::CollectFieldName() {
+  if (!json_mapper.empty()) {
+    return;
+  }
+  cfd::core::CLASS_FUNCTION_TABLE<TxInInfoRequest> func_table;  // NOLINT
+
+  func_table = {
+    TxInInfoRequest::GetTxidString,
+    TxInInfoRequest::SetTxidString,
+    TxInInfoRequest::GetTxidFieldType,
+  };
+  json_mapper.emplace("txid", func_table);
+  item_list.push_back("txid");
+  func_table = {
+    TxInInfoRequest::GetVoutString,
+    TxInInfoRequest::SetVoutString,
+    TxInInfoRequest::GetVoutFieldType,
+  };
+  json_mapper.emplace("vout", func_table);
+  item_list.push_back("vout");
+  func_table = {
+    TxInInfoRequest::GetRedeemScriptString,
+    TxInInfoRequest::SetRedeemScriptString,
+    TxInInfoRequest::GetRedeemScriptFieldType,
+  };
+  json_mapper.emplace("redeemScript", func_table);
+  item_list.push_back("redeemScript");
+  func_table = {
+    TxInInfoRequest::GetMaxWitnessLengthString,
+    TxInInfoRequest::SetMaxWitnessLengthString,
+    TxInInfoRequest::GetMaxWitnessLengthFieldType,
+  };
+  json_mapper.emplace("maxWitnessLength", func_table);
+  item_list.push_back("maxWitnessLength");
+  func_table = {
+    TxInInfoRequest::GetInputSerialIdString,
+    TxInInfoRequest::SetInputSerialIdString,
+    TxInInfoRequest::GetInputSerialIdFieldType,
+  };
+  json_mapper.emplace("inputSerialId", func_table);
+  item_list.push_back("inputSerialId");
+}
+
+void TxInInfoRequest::ConvertFromStruct(
+    const TxInInfoRequestStruct& data) {
+  txid_ = data.txid;
+  vout_ = data.vout;
+  redeem_script_ = data.redeem_script;
+  max_witness_length_ = data.max_witness_length;
+  input_serial_id_ = data.input_serial_id;
+  ignore_items = data.ignore_items;
+}
+
+TxInInfoRequestStruct TxInInfoRequest::ConvertToStruct() const {  // NOLINT
+  TxInInfoRequestStruct result;
+  result.txid = txid_;
+  result.vout = vout_;
+  result.redeem_script = redeem_script_;
+  result.max_witness_length = max_witness_length_;
+  result.input_serial_id = input_serial_id_;
+  result.ignore_items = ignore_items;
+  return result;
+}
+
+// ------------------------------------------------------------------------
 // AddSignatureToFundTransactionRequest
 // ------------------------------------------------------------------------
 cfd::core::JsonTableMap<AddSignatureToFundTransactionRequest>
@@ -399,6 +470,20 @@ void CreateCetRequest::CollectFieldName() {
   };
   json_mapper.emplace("lockTime", func_table);
   item_list.push_back("lockTime");
+  func_table = {
+    CreateCetRequest::GetLocalSerialIdString,
+    CreateCetRequest::SetLocalSerialIdString,
+    CreateCetRequest::GetLocalSerialIdFieldType,
+  };
+  json_mapper.emplace("localSerialId", func_table);
+  item_list.push_back("localSerialId");
+  func_table = {
+    CreateCetRequest::GetRemoteSerialIdString,
+    CreateCetRequest::SetRemoteSerialIdString,
+    CreateCetRequest::GetRemoteSerialIdFieldType,
+  };
+  json_mapper.emplace("remoteSerialId", func_table);
+  item_list.push_back("remoteSerialId");
 }
 
 void CreateCetRequest::ConvertFromStruct(
@@ -412,6 +497,8 @@ void CreateCetRequest::ConvertFromStruct(
   fund_tx_id_ = data.fund_tx_id;
   fund_vout_ = data.fund_vout;
   lock_time_ = data.lock_time;
+  local_serial_id_ = data.local_serial_id;
+  remote_serial_id_ = data.remote_serial_id;
   ignore_items = data.ignore_items;
 }
 
@@ -426,6 +513,8 @@ CreateCetRequestStruct CreateCetRequest::ConvertToStruct() const {  // NOLINT
   result.fund_tx_id = fund_tx_id_;
   result.fund_vout = fund_vout_;
   result.lock_time = lock_time_;
+  result.local_serial_id = local_serial_id_;
+  result.remote_serial_id = remote_serial_id_;
   result.ignore_items = ignore_items;
   return result;
 }
@@ -821,68 +910,6 @@ PayoutRequestStruct PayoutRequest::ConvertToStruct() const {  // NOLINT
 }
 
 // ------------------------------------------------------------------------
-// TxInInfoRequest
-// ------------------------------------------------------------------------
-cfd::core::JsonTableMap<TxInInfoRequest>
-  TxInInfoRequest::json_mapper;
-std::vector<std::string> TxInInfoRequest::item_list;
-
-void TxInInfoRequest::CollectFieldName() {
-  if (!json_mapper.empty()) {
-    return;
-  }
-  cfd::core::CLASS_FUNCTION_TABLE<TxInInfoRequest> func_table;  // NOLINT
-
-  func_table = {
-    TxInInfoRequest::GetTxidString,
-    TxInInfoRequest::SetTxidString,
-    TxInInfoRequest::GetTxidFieldType,
-  };
-  json_mapper.emplace("txid", func_table);
-  item_list.push_back("txid");
-  func_table = {
-    TxInInfoRequest::GetVoutString,
-    TxInInfoRequest::SetVoutString,
-    TxInInfoRequest::GetVoutFieldType,
-  };
-  json_mapper.emplace("vout", func_table);
-  item_list.push_back("vout");
-  func_table = {
-    TxInInfoRequest::GetRedeemScriptString,
-    TxInInfoRequest::SetRedeemScriptString,
-    TxInInfoRequest::GetRedeemScriptFieldType,
-  };
-  json_mapper.emplace("redeemScript", func_table);
-  item_list.push_back("redeemScript");
-  func_table = {
-    TxInInfoRequest::GetMaxWitnessLengthString,
-    TxInInfoRequest::SetMaxWitnessLengthString,
-    TxInInfoRequest::GetMaxWitnessLengthFieldType,
-  };
-  json_mapper.emplace("maxWitnessLength", func_table);
-  item_list.push_back("maxWitnessLength");
-}
-
-void TxInInfoRequest::ConvertFromStruct(
-    const TxInInfoRequestStruct& data) {
-  txid_ = data.txid;
-  vout_ = data.vout;
-  redeem_script_ = data.redeem_script;
-  max_witness_length_ = data.max_witness_length;
-  ignore_items = data.ignore_items;
-}
-
-TxInInfoRequestStruct TxInInfoRequest::ConvertToStruct() const {  // NOLINT
-  TxInInfoRequestStruct result;
-  result.txid = txid_;
-  result.vout = vout_;
-  result.redeem_script = redeem_script_;
-  result.max_witness_length = max_witness_length_;
-  result.ignore_items = ignore_items;
-  return result;
-}
-
-// ------------------------------------------------------------------------
 // CreateDlcTransactionsRequest
 // ------------------------------------------------------------------------
 cfd::core::JsonTableMap<CreateDlcTransactionsRequest>
@@ -945,6 +972,20 @@ void CreateDlcTransactionsRequest::CollectFieldName() {
   json_mapper.emplace("localCollateralAmount", func_table);
   item_list.push_back("localCollateralAmount");
   func_table = {
+    CreateDlcTransactionsRequest::GetLocalPayoutSerialIdString,
+    CreateDlcTransactionsRequest::SetLocalPayoutSerialIdString,
+    CreateDlcTransactionsRequest::GetLocalPayoutSerialIdFieldType,
+  };
+  json_mapper.emplace("localPayoutSerialId", func_table);
+  item_list.push_back("localPayoutSerialId");
+  func_table = {
+    CreateDlcTransactionsRequest::GetLocalChangeSerialIdString,
+    CreateDlcTransactionsRequest::SetLocalChangeSerialIdString,
+    CreateDlcTransactionsRequest::GetLocalChangeSerialIdFieldType,
+  };
+  json_mapper.emplace("localChangeSerialId", func_table);
+  item_list.push_back("localChangeSerialId");
+  func_table = {
     CreateDlcTransactionsRequest::GetRemoteInputAmountString,
     CreateDlcTransactionsRequest::SetRemoteInputAmountString,
     CreateDlcTransactionsRequest::GetRemoteInputAmountFieldType,
@@ -958,6 +999,20 @@ void CreateDlcTransactionsRequest::CollectFieldName() {
   };
   json_mapper.emplace("remoteCollateralAmount", func_table);
   item_list.push_back("remoteCollateralAmount");
+  func_table = {
+    CreateDlcTransactionsRequest::GetRemotePayoutSerialIdString,
+    CreateDlcTransactionsRequest::SetRemotePayoutSerialIdString,
+    CreateDlcTransactionsRequest::GetRemotePayoutSerialIdFieldType,
+  };
+  json_mapper.emplace("remotePayoutSerialId", func_table);
+  item_list.push_back("remotePayoutSerialId");
+  func_table = {
+    CreateDlcTransactionsRequest::GetRemoteChangeSerialIdString,
+    CreateDlcTransactionsRequest::SetRemoteChangeSerialIdString,
+    CreateDlcTransactionsRequest::GetRemoteChangeSerialIdFieldType,
+  };
+  json_mapper.emplace("remoteChangeSerialId", func_table);
+  item_list.push_back("remoteChangeSerialId");
   func_table = {
     CreateDlcTransactionsRequest::GetRefundLocktimeString,
     CreateDlcTransactionsRequest::SetRefundLocktimeString,
@@ -1015,6 +1070,13 @@ void CreateDlcTransactionsRequest::CollectFieldName() {
   json_mapper.emplace("fundLockTime", func_table);
   item_list.push_back("fundLockTime");
   func_table = {
+    CreateDlcTransactionsRequest::GetFundOutputSerialIdString,
+    CreateDlcTransactionsRequest::SetFundOutputSerialIdString,
+    CreateDlcTransactionsRequest::GetFundOutputSerialIdFieldType,
+  };
+  json_mapper.emplace("fundOutputSerialId", func_table);
+  item_list.push_back("fundOutputSerialId");
+  func_table = {
     CreateDlcTransactionsRequest::GetOptionDestString,
     CreateDlcTransactionsRequest::SetOptionDestString,
     CreateDlcTransactionsRequest::GetOptionDestFieldType,
@@ -1039,8 +1101,12 @@ void CreateDlcTransactionsRequest::ConvertFromStruct(
   remote_final_script_pubkey_ = data.remote_final_script_pubkey;
   local_input_amount_ = data.local_input_amount;
   local_collateral_amount_ = data.local_collateral_amount;
+  local_payout_serial_id_ = data.local_payout_serial_id;
+  local_change_serial_id_ = data.local_change_serial_id;
   remote_input_amount_ = data.remote_input_amount;
   remote_collateral_amount_ = data.remote_collateral_amount;
+  remote_payout_serial_id_ = data.remote_payout_serial_id;
+  remote_change_serial_id_ = data.remote_change_serial_id;
   refund_locktime_ = data.refund_locktime;
   local_inputs_.ConvertFromStruct(data.local_inputs);
   local_change_script_pubkey_ = data.local_change_script_pubkey;
@@ -1049,6 +1115,7 @@ void CreateDlcTransactionsRequest::ConvertFromStruct(
   fee_rate_ = data.fee_rate;
   cet_lock_time_ = data.cet_lock_time;
   fund_lock_time_ = data.fund_lock_time;
+  fund_output_serial_id_ = data.fund_output_serial_id;
   option_dest_ = data.option_dest;
   option_premium_ = data.option_premium;
   ignore_items = data.ignore_items;
@@ -1063,8 +1130,12 @@ CreateDlcTransactionsRequestStruct CreateDlcTransactionsRequest::ConvertToStruct
   result.remote_final_script_pubkey = remote_final_script_pubkey_;
   result.local_input_amount = local_input_amount_;
   result.local_collateral_amount = local_collateral_amount_;
+  result.local_payout_serial_id = local_payout_serial_id_;
+  result.local_change_serial_id = local_change_serial_id_;
   result.remote_input_amount = remote_input_amount_;
   result.remote_collateral_amount = remote_collateral_amount_;
+  result.remote_payout_serial_id = remote_payout_serial_id_;
+  result.remote_change_serial_id = remote_change_serial_id_;
   result.refund_locktime = refund_locktime_;
   result.local_inputs = local_inputs_.ConvertToStruct();
   result.local_change_script_pubkey = local_change_script_pubkey_;
@@ -1073,6 +1144,7 @@ CreateDlcTransactionsRequestStruct CreateDlcTransactionsRequest::ConvertToStruct
   result.fee_rate = fee_rate_;
   result.cet_lock_time = cet_lock_time_;
   result.fund_lock_time = fund_lock_time_;
+  result.fund_output_serial_id = fund_output_serial_id_;
   result.option_dest = option_dest_;
   result.option_premium = option_premium_;
   result.ignore_items = ignore_items;
@@ -1128,50 +1200,6 @@ CreateDlcTransactionsResponseStruct CreateDlcTransactionsResponse::ConvertToStru
   result.fund_tx_hex = fund_tx_hex_;
   result.cets_hex = cets_hex_.ConvertToStruct();
   result.refund_tx_hex = refund_tx_hex_;
-  result.ignore_items = ignore_items;
-  return result;
-}
-
-// ------------------------------------------------------------------------
-// TxInRequest
-// ------------------------------------------------------------------------
-cfd::core::JsonTableMap<TxInRequest>
-  TxInRequest::json_mapper;
-std::vector<std::string> TxInRequest::item_list;
-
-void TxInRequest::CollectFieldName() {
-  if (!json_mapper.empty()) {
-    return;
-  }
-  cfd::core::CLASS_FUNCTION_TABLE<TxInRequest> func_table;  // NOLINT
-
-  func_table = {
-    TxInRequest::GetTxidString,
-    TxInRequest::SetTxidString,
-    TxInRequest::GetTxidFieldType,
-  };
-  json_mapper.emplace("txid", func_table);
-  item_list.push_back("txid");
-  func_table = {
-    TxInRequest::GetVoutString,
-    TxInRequest::SetVoutString,
-    TxInRequest::GetVoutFieldType,
-  };
-  json_mapper.emplace("vout", func_table);
-  item_list.push_back("vout");
-}
-
-void TxInRequest::ConvertFromStruct(
-    const TxInRequestStruct& data) {
-  txid_ = data.txid;
-  vout_ = data.vout;
-  ignore_items = data.ignore_items;
-}
-
-TxInRequestStruct TxInRequest::ConvertToStruct() const {  // NOLINT
-  TxInRequestStruct result;
-  result.txid = txid_;
-  result.vout = vout_;
   result.ignore_items = ignore_items;
   return result;
 }
@@ -1303,6 +1331,34 @@ void CreateFundTransactionRequest::CollectFieldName() {
   };
   json_mapper.emplace("optionPremium", func_table);
   item_list.push_back("optionPremium");
+  func_table = {
+    CreateFundTransactionRequest::GetLockTimeString,
+    CreateFundTransactionRequest::SetLockTimeString,
+    CreateFundTransactionRequest::GetLockTimeFieldType,
+  };
+  json_mapper.emplace("lockTime", func_table);
+  item_list.push_back("lockTime");
+  func_table = {
+    CreateFundTransactionRequest::GetLocalSerialIdString,
+    CreateFundTransactionRequest::SetLocalSerialIdString,
+    CreateFundTransactionRequest::GetLocalSerialIdFieldType,
+  };
+  json_mapper.emplace("localSerialId", func_table);
+  item_list.push_back("localSerialId");
+  func_table = {
+    CreateFundTransactionRequest::GetRemoteSerialIdString,
+    CreateFundTransactionRequest::SetRemoteSerialIdString,
+    CreateFundTransactionRequest::GetRemoteSerialIdFieldType,
+  };
+  json_mapper.emplace("remoteSerialId", func_table);
+  item_list.push_back("remoteSerialId");
+  func_table = {
+    CreateFundTransactionRequest::GetOutputSerialIdString,
+    CreateFundTransactionRequest::SetOutputSerialIdString,
+    CreateFundTransactionRequest::GetOutputSerialIdFieldType,
+  };
+  json_mapper.emplace("outputSerialId", func_table);
+  item_list.push_back("outputSerialId");
 }
 
 void CreateFundTransactionRequest::ConvertFromStruct(
@@ -1317,6 +1373,10 @@ void CreateFundTransactionRequest::ConvertFromStruct(
   fee_rate_ = data.fee_rate;
   option_dest_ = data.option_dest;
   option_premium_ = data.option_premium;
+  lock_time_ = data.lock_time;
+  local_serial_id_ = data.local_serial_id;
+  remote_serial_id_ = data.remote_serial_id;
+  output_serial_id_ = data.output_serial_id;
   ignore_items = data.ignore_items;
 }
 
@@ -1332,6 +1392,10 @@ CreateFundTransactionRequestStruct CreateFundTransactionRequest::ConvertToStruct
   result.fee_rate = fee_rate_;
   result.option_dest = option_dest_;
   result.option_premium = option_premium_;
+  result.lock_time = lock_time_;
+  result.local_serial_id = local_serial_id_;
+  result.remote_serial_id = remote_serial_id_;
+  result.output_serial_id = output_serial_id_;
   result.ignore_items = ignore_items;
   return result;
 }

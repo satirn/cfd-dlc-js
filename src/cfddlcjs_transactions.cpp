@@ -30,6 +30,7 @@ using cfd::core::TxIn;
 using cfd::dlc::DlcManager;
 using cfd::dlc::DlcOutcome;
 using cfd::dlc::DlcTransactions;
+using cfd::dlc::TxInputInfo;
 
 TxOut GetChangeOutput(const std::string& address_string, int64_t amount_int) {
   Address address(address_string);
@@ -50,6 +51,17 @@ NetType ParseNetType(std::string input) {
                      "Unsupported network type");
 }
 
+static TxInputInfo ParseTxInRequest(TxInInfoRequestStruct& input_info) {
+  Txid txid(input_info.txid);
+  if (input_info.redeem_script != "") {
+    TxIn input(txid, input_info.vout, 0, Script(input_info.redeem_script));
+    return {input, input_info.max_witness_length, input_info.input_serial_id};
+  } else {
+    TxIn input(txid, input_info.vout, 0);
+    return {input, input_info.max_witness_length, input_info.input_serial_id};
+  }
+}
+
 CreateFundTransactionResponseStruct DlcTransactionsApi::CreateFundTransaction(
     const CreateFundTransactionRequestStruct& request) {
   auto call_func = [](const CreateFundTransactionRequestStruct& request)
@@ -61,29 +73,33 @@ CreateFundTransactionResponseStruct DlcTransactionsApi::CreateFundTransaction(
     auto option_premium = Amount::CreateBySatoshiAmount(request.option_premium);
     auto option_dest =
         request.option_dest == "" ? Address() : Address(request.option_dest);
+    
+    std::vector<TxInputInfo> local_inputs;
 
-    std::vector<TxIn> local_inputs;
-    for (TxInRequestStruct txin_req : request.local_inputs) {
-      auto txid = Txid(txin_req.txid);
-      auto txin = TxIn(txid, txin_req.vout, 0);
-      local_inputs.push_back(txin);
+    for (auto input_request : request.local_inputs) {
+      local_inputs.push_back(ParseTxInRequest(input_request));
     }
 
-    auto local_change_address = Address(request.local_change.address);
-    std::vector<TxIn> remote_inputs;
-    for (TxInRequestStruct txin_req : request.remote_inputs) {
-      auto txid = Txid(txin_req.txid);
-      auto txin = TxIn(txid, txin_req.vout, 0);
-      remote_inputs.push_back(txin);
+    std::vector<TxInputInfo> remote_inputs;
+
+    for (auto input_request : request.remote_inputs) {
+      remote_inputs.push_back(ParseTxInRequest(input_request));
     }
 
     auto local_change = GetChangeOutput(request.local_change.address,
                                         request.local_change.amount);
     auto remote_change = GetChangeOutput(request.remote_change.address,
                                          request.remote_change.amount);
+
+    uint64_t lock_time = request.lock_time;
+    uint64_t local_serial_id = request.local_serial_id;
+    uint64_t remote_serial_id = request.remote_serial_id;
+    uint64_t output_serial_id = request.output_serial_id;
+
     auto transaction = DlcManager::CreateFundTransaction(
         local_pubkey, remote_pubkey, output_amount, local_inputs, local_change,
-        remote_inputs, remote_change, option_dest, option_premium);
+        remote_inputs, remote_change, option_dest, option_premium, lock_time,
+        local_serial_id, remote_serial_id, output_serial_id);
     response.hex = transaction.GetHex();
     return response;
   };
@@ -198,7 +214,8 @@ CreateCetResponseStruct DlcTransactionsApi::CreateCet(
 
     auto transaction =
         DlcManager::CreateCet(local_output, remote_output, fund_tx_id,
-                              request.fund_vout, request.lock_time);
+                              request.fund_vout, request.lock_time,
+                              request.local_serial_id, request.remote_serial_id);
 
     response.hex = transaction.GetHex();
     return response;
@@ -236,17 +253,6 @@ DlcTransactionsApi::CreateRefundTransaction(
   return result;
 }
 
-static TxInputInfo ParseTxInRequest(TxInInfoRequestStruct& input_info) {
-  Txid txid(input_info.txid);
-  if (input_info.redeem_script != "") {
-    TxIn input(txid, input_info.vout, 0, Script(input_info.redeem_script));
-    return {input, input_info.max_witness_length};
-  } else {
-    TxIn input(txid, input_info.vout, 0);
-    return {input, input_info.max_witness_length};
-  }
-}
-
 CreateDlcTransactionsResponseStruct DlcTransactionsApi::CreateDlcTransactions(
     const CreateDlcTransactionsRequestStruct& request) {
   auto call_func = [](const CreateDlcTransactionsRequestStruct& request)
@@ -276,6 +282,7 @@ CreateDlcTransactionsResponseStruct DlcTransactionsApi::CreateDlcTransactions(
     uint64_t refund_locktime = request.refund_locktime;
     uint64_t fund_lock_time = request.fund_lock_time;
     uint64_t cet_lock_time = request.cet_lock_time;
+    uint64_t fund_output_serial_id = request.fund_output_serial_id;
     auto option_premium = Amount::CreateBySatoshiAmount(request.option_premium);
     auto option_dest =
         request.option_dest == "" ? Address() : Address(request.option_dest);
@@ -294,19 +301,27 @@ CreateDlcTransactionsResponseStruct DlcTransactionsApi::CreateDlcTransactions(
 
     uint32_t fee_rate = request.fee_rate;
 
+    uint64_t local_payout_serial_id = request.local_payout_serial_id;
+    uint64_t local_change_serial_id = request.local_change_serial_id;
+    uint64_t remote_payout_serial_id = request.remote_payout_serial_id;
+    uint64_t remote_change_serial_id = request.remote_change_serial_id;
+
     Script local_change_script_pubkey(request.local_change_script_pubkey);
     Script remote_change_script_pubkey(request.remote_change_script_pubkey);
     PartyParams local_params = {
         local_fund_pubkey,         local_change_script_pubkey,
         local_final_script_pubkey, local_inputs,
-        local_input_amount,        local_collateral_amount};
+        local_input_amount,        local_collateral_amount,
+        local_payout_serial_id,    local_change_serial_id};
     PartyParams remote_params = {
         remote_fund_pubkey,         remote_change_script_pubkey,
         remote_final_script_pubkey, remote_inputs,
-        remote_input_amount,        remote_collateral_amount};
+        remote_input_amount,        remote_collateral_amount,
+        remote_payout_serial_id,    remote_change_serial_id};
     auto transactions = DlcManager::CreateDlcTransactions(
         outcomes, local_params, remote_params, refund_locktime, fee_rate,
-        option_dest, option_premium, fund_lock_time, cet_lock_time);
+        option_dest, option_premium, fund_lock_time, cet_lock_time,
+        fund_output_serial_id);
     CreateDlcTransactionsResponseStruct result;
     result.fund_tx_hex = transactions.fund_transaction.GetHex();
     result.refund_tx_hex = transactions.refund_transaction.GetHex();

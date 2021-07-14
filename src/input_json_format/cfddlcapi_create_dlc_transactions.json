@@ -20,10 +20,18 @@
     "localInputAmount:type": "uint64_t",
     "localCollateralAmount": 0,
     "localCollateralAmount:type": "uint64_t",
+    "localPayoutSerialId": 0,
+    "localPayoutSerialId:type": "uint64_t",
+    "localChangeSerialId": 0,
+    "localChangeSerialId:type": "uint64_t",
     "remoteInputAmount": 0,
     "remoteInputAmount:type": "uint64_t",
     "remoteCollateralAmount": 0,
     "remoteCollateralAmount:type": "uint64_t",
+    "remotePayoutSerialId": 0,
+    "remotePayoutSerialId:type": "uint64_t",
+    "remoteChangeSerialId": 0,
+    "remoteChangeSerialId:type": "uint64_t",
     "refundLocktime": 0,
     "refundLocktime:type": "uint64_t",
     "localInputs": [
@@ -35,7 +43,10 @@
         "redeemScript": "",
         "redeemScript:require": "optional",
         "maxWitnessLength": 108,
-        "maxWitnessLength:type": "uint32_t"
+        "maxWitnessLength:type": "uint32_t",
+        "inputSerialId": 0,
+        "inputSerialId:type": "uint64_t",
+        "inputSerialId:require": "optional"
       }
     ],
     "localChangeScriptPubkey": "",
@@ -48,7 +59,10 @@
         "redeemScript": "",
         "redeemScript:require": "optional",
         "maxWitnessLength": 108,
-        "maxWitnessLength:type": "uint32_t"
+        "maxWitnessLength:type": "uint32_t",
+        "inputSerialId": 0,
+        "inputSerialId:type": "uint64_t",
+        "inputSerialId:require": "optional"
       }
     ],
     "remoteChangeScriptPubkey": "",
@@ -60,6 +74,9 @@
     "fundLockTime": 0,
     "fundLockTime:type": "uint64_t",
     "fundLockTime:require": "optional",
+    "fundOutputSerialId": 0,
+    "fundOutputSerialId:type": "uint64_t",
+    "fundOutputSerialId:require": "optional",
     "optionDest": "",
     "optionDest:require": "optional",
     "optionPremium": 0,

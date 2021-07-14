@@ -353,6 +353,332 @@ class Messages
 };
 
 // ------------------------------------------------------------------------
+// TxInInfoRequest
+// ------------------------------------------------------------------------
+/**
+ * @brief JSON-API (TxInInfoRequest) class
+ */
+class TxInInfoRequest
+  : public cfd::core::JsonClassBase<TxInInfoRequest> {
+ public:
+  TxInInfoRequest() {
+    CollectFieldName();
+  }
+  virtual ~TxInInfoRequest() {
+    // do nothing
+  }
+  /**
+   * @brief collect field name.
+   */
+  static void CollectFieldName();
+
+  /**
+   * @brief Get of txid
+   * @return txid
+   */
+  std::string GetTxid() const {
+    return txid_;
+  }
+  /**
+   * @brief Set to txid
+   * @param[in] txid    setting value.
+   */
+  void SetTxid(  // line separate
+    const std::string& txid) {  // NOLINT
+    this->txid_ = txid;
+  }
+  /**
+   * @brief Get data type of txid
+   * @return Data type of txid
+   */
+  static std::string GetTxidFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of txid field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetTxidString(  // line separate
+      const TxInInfoRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.txid_);
+  }
+  /**
+   * @brief Set json object to txid field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetTxidString(  // line separate
+      TxInInfoRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.txid_, json_value);
+  }
+
+  /**
+   * @brief Get of vout
+   * @return vout
+   */
+  uint32_t GetVout() const {
+    return vout_;
+  }
+  /**
+   * @brief Set to vout
+   * @param[in] vout    setting value.
+   */
+  void SetVout(  // line separate
+    const uint32_t& vout) {  // NOLINT
+    this->vout_ = vout;
+  }
+  /**
+   * @brief Get data type of vout
+   * @return Data type of vout
+   */
+  static std::string GetVoutFieldType() {
+    return "uint32_t";
+  }
+  /**
+   * @brief Get json string of vout field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetVoutString(  // line separate
+      const TxInInfoRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.vout_);
+  }
+  /**
+   * @brief Set json object to vout field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetVoutString(  // line separate
+      TxInInfoRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.vout_, json_value);
+  }
+
+  /**
+   * @brief Get of redeemScript
+   * @return redeemScript
+   */
+  std::string GetRedeemScript() const {
+    return redeem_script_;
+  }
+  /**
+   * @brief Set to redeemScript
+   * @param[in] redeem_script    setting value.
+   */
+  void SetRedeemScript(  // line separate
+    const std::string& redeem_script) {  // NOLINT
+    this->redeem_script_ = redeem_script;
+  }
+  /**
+   * @brief Get data type of redeemScript
+   * @return Data type of redeemScript
+   */
+  static std::string GetRedeemScriptFieldType() {
+    return "std::string";
+  }
+  /**
+   * @brief Get json string of redeemScript field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRedeemScriptString(  // line separate
+      const TxInInfoRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.redeem_script_);
+  }
+  /**
+   * @brief Set json object to redeemScript field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRedeemScriptString(  // line separate
+      TxInInfoRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.redeem_script_, json_value);
+  }
+
+  /**
+   * @brief Get of maxWitnessLength
+   * @return maxWitnessLength
+   */
+  uint32_t GetMaxWitnessLength() const {
+    return max_witness_length_;
+  }
+  /**
+   * @brief Set to maxWitnessLength
+   * @param[in] max_witness_length    setting value.
+   */
+  void SetMaxWitnessLength(  // line separate
+    const uint32_t& max_witness_length) {  // NOLINT
+    this->max_witness_length_ = max_witness_length;
+  }
+  /**
+   * @brief Get data type of maxWitnessLength
+   * @return Data type of maxWitnessLength
+   */
+  static std::string GetMaxWitnessLengthFieldType() {
+    return "uint32_t";
+  }
+  /**
+   * @brief Get json string of maxWitnessLength field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetMaxWitnessLengthString(  // line separate
+      const TxInInfoRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.max_witness_length_);
+  }
+  /**
+   * @brief Set json object to maxWitnessLength field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetMaxWitnessLengthString(  // line separate
+      TxInInfoRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.max_witness_length_, json_value);
+  }
+
+  /**
+   * @brief Get of inputSerialId
+   * @return inputSerialId
+   */
+  uint64_t GetInputSerialId() const {
+    return input_serial_id_;
+  }
+  /**
+   * @brief Set to inputSerialId
+   * @param[in] input_serial_id    setting value.
+   */
+  void SetInputSerialId(  // line separate
+    const uint64_t& input_serial_id) {  // NOLINT
+    this->input_serial_id_ = input_serial_id;
+  }
+  /**
+   * @brief Get data type of inputSerialId
+   * @return Data type of inputSerialId
+   */
+  static std::string GetInputSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of inputSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetInputSerialIdString(  // line separate
+      const TxInInfoRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.input_serial_id_);
+  }
+  /**
+   * @brief Set json object to inputSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetInputSerialIdString(  // line separate
+      TxInInfoRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.input_serial_id_, json_value);
+  }
+
+  /**
+   * @brief Set ignore item.
+   * @param[in] key   ignore target key name.
+   */
+  void SetIgnoreItem(const std::string& key) {
+    ignore_items.insert(key);
+  }
+
+  /**
+   * @brief Convert struct to class.
+   * @param[in] data   struct data.
+   */
+  void ConvertFromStruct(
+      const TxInInfoRequestStruct& data);
+
+  /**
+   * @brief Convert class to struct.
+   * @return  struct data.
+   */
+  TxInInfoRequestStruct ConvertToStruct()  const;
+
+ protected:
+  /**
+   * @brief definition type of Map table.
+   */
+  using TxInInfoRequestMapTable =
+    cfd::core::JsonTableMap<TxInInfoRequest>;
+
+  /**
+   * @brief Get JSON mapping object.
+   * @return JSON mapping object.
+   * @see cfd::core::JsonClassBase::GetJsonMapper()
+   */
+  virtual const TxInInfoRequestMapTable& GetJsonMapper() const {  // NOLINT
+    return json_mapper;
+  }
+  /**
+   * @brief Get item lists of JSON mapping.
+   * Fetch a list of target variable names in the order of definition.
+   * @return Item lists of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetJsonItemList()
+   */
+  virtual const std::vector<std::string>& GetJsonItemList() const {
+    return item_list;
+  }
+  /**
+   * @brief Get ignore item lists of JSON mapping.
+   * Ignore the target variable at Serialize.
+   * @return Item list of JSON mapping.
+   * @see cfd::core::JsonClassBase::GetIgnoreItem()
+   */
+  virtual const std::set<std::string>& GetIgnoreItem() const {
+    return ignore_items;
+  }
+
+ private:
+ /**
+  * @brief JsonFunctionMap table
+  */
+  static TxInInfoRequestMapTable json_mapper;
+  /**
+   * @brief field name list.
+   */
+  static std::vector<std::string> item_list;
+  /**
+   * @brief ignore item list.
+   */
+  std::set<std::string> ignore_items;
+
+  /**
+   * @brief JsonAPI(txid) value
+   */
+  std::string txid_ = "";
+  /**
+   * @brief JsonAPI(vout) value
+   */
+  uint32_t vout_ = 0;
+  /**
+   * @brief JsonAPI(redeemScript) value
+   */
+  std::string redeem_script_ = "";
+  /**
+   * @brief JsonAPI(maxWitnessLength) value
+   */
+  uint32_t max_witness_length_ = 108;
+  /**
+   * @brief JsonAPI(inputSerialId) value
+   */
+  uint64_t input_serial_id_ = 0;
+};
+
+// ------------------------------------------------------------------------
 // AddSignatureToFundTransactionRequest
 // ------------------------------------------------------------------------
 /**
@@ -1736,6 +2062,92 @@ class CreateCetRequest
   }
 
   /**
+   * @brief Get of localSerialId
+   * @return localSerialId
+   */
+  uint64_t GetLocalSerialId() const {
+    return local_serial_id_;
+  }
+  /**
+   * @brief Set to localSerialId
+   * @param[in] local_serial_id    setting value.
+   */
+  void SetLocalSerialId(  // line separate
+    const uint64_t& local_serial_id) {  // NOLINT
+    this->local_serial_id_ = local_serial_id;
+  }
+  /**
+   * @brief Get data type of localSerialId
+   * @return Data type of localSerialId
+   */
+  static std::string GetLocalSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of localSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLocalSerialIdString(  // line separate
+      const CreateCetRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.local_serial_id_);
+  }
+  /**
+   * @brief Set json object to localSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLocalSerialIdString(  // line separate
+      CreateCetRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.local_serial_id_, json_value);
+  }
+
+  /**
+   * @brief Get of remoteSerialId
+   * @return remoteSerialId
+   */
+  uint64_t GetRemoteSerialId() const {
+    return remote_serial_id_;
+  }
+  /**
+   * @brief Set to remoteSerialId
+   * @param[in] remote_serial_id    setting value.
+   */
+  void SetRemoteSerialId(  // line separate
+    const uint64_t& remote_serial_id) {  // NOLINT
+    this->remote_serial_id_ = remote_serial_id;
+  }
+  /**
+   * @brief Get data type of remoteSerialId
+   * @return Data type of remoteSerialId
+   */
+  static std::string GetRemoteSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of remoteSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRemoteSerialIdString(  // line separate
+      const CreateCetRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.remote_serial_id_);
+  }
+  /**
+   * @brief Set json object to remoteSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRemoteSerialIdString(  // line separate
+      CreateCetRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.remote_serial_id_, json_value);
+  }
+
+  /**
    * @brief Set ignore item.
    * @param[in] key   ignore target key name.
    */
@@ -1840,6 +2252,14 @@ class CreateCetRequest
    * @brief JsonAPI(lockTime) value
    */
   uint64_t lock_time_ = 0;
+  /**
+   * @brief JsonAPI(localSerialId) value
+   */
+  uint64_t local_serial_id_ = 0;
+  /**
+   * @brief JsonAPI(remoteSerialId) value
+   */
+  uint64_t remote_serial_id_ = 0;
 };
 
 // ------------------------------------------------------------------------
@@ -3617,285 +4037,6 @@ class PayoutRequest
 };
 
 // ------------------------------------------------------------------------
-// TxInInfoRequest
-// ------------------------------------------------------------------------
-/**
- * @brief JSON-API (TxInInfoRequest) class
- */
-class TxInInfoRequest
-  : public cfd::core::JsonClassBase<TxInInfoRequest> {
- public:
-  TxInInfoRequest() {
-    CollectFieldName();
-  }
-  virtual ~TxInInfoRequest() {
-    // do nothing
-  }
-  /**
-   * @brief collect field name.
-   */
-  static void CollectFieldName();
-
-  /**
-   * @brief Get of txid
-   * @return txid
-   */
-  std::string GetTxid() const {
-    return txid_;
-  }
-  /**
-   * @brief Set to txid
-   * @param[in] txid    setting value.
-   */
-  void SetTxid(  // line separate
-    const std::string& txid) {  // NOLINT
-    this->txid_ = txid;
-  }
-  /**
-   * @brief Get data type of txid
-   * @return Data type of txid
-   */
-  static std::string GetTxidFieldType() {
-    return "std::string";
-  }
-  /**
-   * @brief Get json string of txid field.
-   * @param[in,out] obj     class object.
-   * @return JSON string
-   */
-  static std::string GetTxidString(  // line separate
-      const TxInInfoRequest& obj) {  // NOLINT
-    return cfd::core::ConvertToString(obj.txid_);
-  }
-  /**
-   * @brief Set json object to txid field.
-   * @param[in,out] obj     class object.
-   * @param[in] json_value  JSON object.
-   */
-  static void SetTxidString(  // line separate
-      TxInInfoRequest& obj,  // NOLINT
-      const UniValue& json_value) {
-    cfd::core::ConvertFromUniValue(  // line separate
-      obj.txid_, json_value);
-  }
-
-  /**
-   * @brief Get of vout
-   * @return vout
-   */
-  uint32_t GetVout() const {
-    return vout_;
-  }
-  /**
-   * @brief Set to vout
-   * @param[in] vout    setting value.
-   */
-  void SetVout(  // line separate
-    const uint32_t& vout) {  // NOLINT
-    this->vout_ = vout;
-  }
-  /**
-   * @brief Get data type of vout
-   * @return Data type of vout
-   */
-  static std::string GetVoutFieldType() {
-    return "uint32_t";
-  }
-  /**
-   * @brief Get json string of vout field.
-   * @param[in,out] obj     class object.
-   * @return JSON string
-   */
-  static std::string GetVoutString(  // line separate
-      const TxInInfoRequest& obj) {  // NOLINT
-    return cfd::core::ConvertToString(obj.vout_);
-  }
-  /**
-   * @brief Set json object to vout field.
-   * @param[in,out] obj     class object.
-   * @param[in] json_value  JSON object.
-   */
-  static void SetVoutString(  // line separate
-      TxInInfoRequest& obj,  // NOLINT
-      const UniValue& json_value) {
-    cfd::core::ConvertFromUniValue(  // line separate
-      obj.vout_, json_value);
-  }
-
-  /**
-   * @brief Get of redeemScript
-   * @return redeemScript
-   */
-  std::string GetRedeemScript() const {
-    return redeem_script_;
-  }
-  /**
-   * @brief Set to redeemScript
-   * @param[in] redeem_script    setting value.
-   */
-  void SetRedeemScript(  // line separate
-    const std::string& redeem_script) {  // NOLINT
-    this->redeem_script_ = redeem_script;
-  }
-  /**
-   * @brief Get data type of redeemScript
-   * @return Data type of redeemScript
-   */
-  static std::string GetRedeemScriptFieldType() {
-    return "std::string";
-  }
-  /**
-   * @brief Get json string of redeemScript field.
-   * @param[in,out] obj     class object.
-   * @return JSON string
-   */
-  static std::string GetRedeemScriptString(  // line separate
-      const TxInInfoRequest& obj) {  // NOLINT
-    return cfd::core::ConvertToString(obj.redeem_script_);
-  }
-  /**
-   * @brief Set json object to redeemScript field.
-   * @param[in,out] obj     class object.
-   * @param[in] json_value  JSON object.
-   */
-  static void SetRedeemScriptString(  // line separate
-      TxInInfoRequest& obj,  // NOLINT
-      const UniValue& json_value) {
-    cfd::core::ConvertFromUniValue(  // line separate
-      obj.redeem_script_, json_value);
-  }
-
-  /**
-   * @brief Get of maxWitnessLength
-   * @return maxWitnessLength
-   */
-  uint32_t GetMaxWitnessLength() const {
-    return max_witness_length_;
-  }
-  /**
-   * @brief Set to maxWitnessLength
-   * @param[in] max_witness_length    setting value.
-   */
-  void SetMaxWitnessLength(  // line separate
-    const uint32_t& max_witness_length) {  // NOLINT
-    this->max_witness_length_ = max_witness_length;
-  }
-  /**
-   * @brief Get data type of maxWitnessLength
-   * @return Data type of maxWitnessLength
-   */
-  static std::string GetMaxWitnessLengthFieldType() {
-    return "uint32_t";
-  }
-  /**
-   * @brief Get json string of maxWitnessLength field.
-   * @param[in,out] obj     class object.
-   * @return JSON string
-   */
-  static std::string GetMaxWitnessLengthString(  // line separate
-      const TxInInfoRequest& obj) {  // NOLINT
-    return cfd::core::ConvertToString(obj.max_witness_length_);
-  }
-  /**
-   * @brief Set json object to maxWitnessLength field.
-   * @param[in,out] obj     class object.
-   * @param[in] json_value  JSON object.
-   */
-  static void SetMaxWitnessLengthString(  // line separate
-      TxInInfoRequest& obj,  // NOLINT
-      const UniValue& json_value) {
-    cfd::core::ConvertFromUniValue(  // line separate
-      obj.max_witness_length_, json_value);
-  }
-
-  /**
-   * @brief Set ignore item.
-   * @param[in] key   ignore target key name.
-   */
-  void SetIgnoreItem(const std::string& key) {
-    ignore_items.insert(key);
-  }
-
-  /**
-   * @brief Convert struct to class.
-   * @param[in] data   struct data.
-   */
-  void ConvertFromStruct(
-      const TxInInfoRequestStruct& data);
-
-  /**
-   * @brief Convert class to struct.
-   * @return  struct data.
-   */
-  TxInInfoRequestStruct ConvertToStruct()  const;
-
- protected:
-  /**
-   * @brief definition type of Map table.
-   */
-  using TxInInfoRequestMapTable =
-    cfd::core::JsonTableMap<TxInInfoRequest>;
-
-  /**
-   * @brief Get JSON mapping object.
-   * @return JSON mapping object.
-   * @see cfd::core::JsonClassBase::GetJsonMapper()
-   */
-  virtual const TxInInfoRequestMapTable& GetJsonMapper() const {  // NOLINT
-    return json_mapper;
-  }
-  /**
-   * @brief Get item lists of JSON mapping.
-   * Fetch a list of target variable names in the order of definition.
-   * @return Item lists of JSON mapping.
-   * @see cfd::core::JsonClassBase::GetJsonItemList()
-   */
-  virtual const std::vector<std::string>& GetJsonItemList() const {
-    return item_list;
-  }
-  /**
-   * @brief Get ignore item lists of JSON mapping.
-   * Ignore the target variable at Serialize.
-   * @return Item list of JSON mapping.
-   * @see cfd::core::JsonClassBase::GetIgnoreItem()
-   */
-  virtual const std::set<std::string>& GetIgnoreItem() const {
-    return ignore_items;
-  }
-
- private:
- /**
-  * @brief JsonFunctionMap table
-  */
-  static TxInInfoRequestMapTable json_mapper;
-  /**
-   * @brief field name list.
-   */
-  static std::vector<std::string> item_list;
-  /**
-   * @brief ignore item list.
-   */
-  std::set<std::string> ignore_items;
-
-  /**
-   * @brief JsonAPI(txid) value
-   */
-  std::string txid_ = "";
-  /**
-   * @brief JsonAPI(vout) value
-   */
-  uint32_t vout_ = 0;
-  /**
-   * @brief JsonAPI(redeemScript) value
-   */
-  std::string redeem_script_ = "";
-  /**
-   * @brief JsonAPI(maxWitnessLength) value
-   */
-  uint32_t max_witness_length_ = 108;
-};
-
-// ------------------------------------------------------------------------
 // CreateDlcTransactionsRequest
 // ------------------------------------------------------------------------
 /**
@@ -4218,6 +4359,92 @@ class CreateDlcTransactionsRequest
   }
 
   /**
+   * @brief Get of localPayoutSerialId
+   * @return localPayoutSerialId
+   */
+  uint64_t GetLocalPayoutSerialId() const {
+    return local_payout_serial_id_;
+  }
+  /**
+   * @brief Set to localPayoutSerialId
+   * @param[in] local_payout_serial_id    setting value.
+   */
+  void SetLocalPayoutSerialId(  // line separate
+    const uint64_t& local_payout_serial_id) {  // NOLINT
+    this->local_payout_serial_id_ = local_payout_serial_id;
+  }
+  /**
+   * @brief Get data type of localPayoutSerialId
+   * @return Data type of localPayoutSerialId
+   */
+  static std::string GetLocalPayoutSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of localPayoutSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLocalPayoutSerialIdString(  // line separate
+      const CreateDlcTransactionsRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.local_payout_serial_id_);
+  }
+  /**
+   * @brief Set json object to localPayoutSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLocalPayoutSerialIdString(  // line separate
+      CreateDlcTransactionsRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.local_payout_serial_id_, json_value);
+  }
+
+  /**
+   * @brief Get of localChangeSerialId
+   * @return localChangeSerialId
+   */
+  uint64_t GetLocalChangeSerialId() const {
+    return local_change_serial_id_;
+  }
+  /**
+   * @brief Set to localChangeSerialId
+   * @param[in] local_change_serial_id    setting value.
+   */
+  void SetLocalChangeSerialId(  // line separate
+    const uint64_t& local_change_serial_id) {  // NOLINT
+    this->local_change_serial_id_ = local_change_serial_id;
+  }
+  /**
+   * @brief Get data type of localChangeSerialId
+   * @return Data type of localChangeSerialId
+   */
+  static std::string GetLocalChangeSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of localChangeSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLocalChangeSerialIdString(  // line separate
+      const CreateDlcTransactionsRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.local_change_serial_id_);
+  }
+  /**
+   * @brief Set json object to localChangeSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLocalChangeSerialIdString(  // line separate
+      CreateDlcTransactionsRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.local_change_serial_id_, json_value);
+  }
+
+  /**
    * @brief Get of remoteInputAmount
    * @return remoteInputAmount
    */
@@ -4301,6 +4528,92 @@ class CreateDlcTransactionsRequest
       const UniValue& json_value) {
     cfd::core::ConvertFromUniValue(  // line separate
       obj.remote_collateral_amount_, json_value);
+  }
+
+  /**
+   * @brief Get of remotePayoutSerialId
+   * @return remotePayoutSerialId
+   */
+  uint64_t GetRemotePayoutSerialId() const {
+    return remote_payout_serial_id_;
+  }
+  /**
+   * @brief Set to remotePayoutSerialId
+   * @param[in] remote_payout_serial_id    setting value.
+   */
+  void SetRemotePayoutSerialId(  // line separate
+    const uint64_t& remote_payout_serial_id) {  // NOLINT
+    this->remote_payout_serial_id_ = remote_payout_serial_id;
+  }
+  /**
+   * @brief Get data type of remotePayoutSerialId
+   * @return Data type of remotePayoutSerialId
+   */
+  static std::string GetRemotePayoutSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of remotePayoutSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRemotePayoutSerialIdString(  // line separate
+      const CreateDlcTransactionsRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.remote_payout_serial_id_);
+  }
+  /**
+   * @brief Set json object to remotePayoutSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRemotePayoutSerialIdString(  // line separate
+      CreateDlcTransactionsRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.remote_payout_serial_id_, json_value);
+  }
+
+  /**
+   * @brief Get of remoteChangeSerialId
+   * @return remoteChangeSerialId
+   */
+  uint64_t GetRemoteChangeSerialId() const {
+    return remote_change_serial_id_;
+  }
+  /**
+   * @brief Set to remoteChangeSerialId
+   * @param[in] remote_change_serial_id    setting value.
+   */
+  void SetRemoteChangeSerialId(  // line separate
+    const uint64_t& remote_change_serial_id) {  // NOLINT
+    this->remote_change_serial_id_ = remote_change_serial_id;
+  }
+  /**
+   * @brief Get data type of remoteChangeSerialId
+   * @return Data type of remoteChangeSerialId
+   */
+  static std::string GetRemoteChangeSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of remoteChangeSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRemoteChangeSerialIdString(  // line separate
+      const CreateDlcTransactionsRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.remote_change_serial_id_);
+  }
+  /**
+   * @brief Set json object to remoteChangeSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRemoteChangeSerialIdString(  // line separate
+      CreateDlcTransactionsRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.remote_change_serial_id_, json_value);
   }
 
   /**
@@ -4650,6 +4963,49 @@ class CreateDlcTransactionsRequest
   }
 
   /**
+   * @brief Get of fundOutputSerialId
+   * @return fundOutputSerialId
+   */
+  uint64_t GetFundOutputSerialId() const {
+    return fund_output_serial_id_;
+  }
+  /**
+   * @brief Set to fundOutputSerialId
+   * @param[in] fund_output_serial_id    setting value.
+   */
+  void SetFundOutputSerialId(  // line separate
+    const uint64_t& fund_output_serial_id) {  // NOLINT
+    this->fund_output_serial_id_ = fund_output_serial_id;
+  }
+  /**
+   * @brief Get data type of fundOutputSerialId
+   * @return Data type of fundOutputSerialId
+   */
+  static std::string GetFundOutputSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of fundOutputSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetFundOutputSerialIdString(  // line separate
+      const CreateDlcTransactionsRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.fund_output_serial_id_);
+  }
+  /**
+   * @brief Set json object to fundOutputSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetFundOutputSerialIdString(  // line separate
+      CreateDlcTransactionsRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.fund_output_serial_id_, json_value);
+  }
+
+  /**
    * @brief Get of optionDest
    * @return optionDest
    */
@@ -4833,6 +5189,14 @@ class CreateDlcTransactionsRequest
    */
   uint64_t local_collateral_amount_ = 0;
   /**
+   * @brief JsonAPI(localPayoutSerialId) value
+   */
+  uint64_t local_payout_serial_id_ = 0;
+  /**
+   * @brief JsonAPI(localChangeSerialId) value
+   */
+  uint64_t local_change_serial_id_ = 0;
+  /**
    * @brief JsonAPI(remoteInputAmount) value
    */
   uint64_t remote_input_amount_ = 0;
@@ -4840,6 +5204,14 @@ class CreateDlcTransactionsRequest
    * @brief JsonAPI(remoteCollateralAmount) value
    */
   uint64_t remote_collateral_amount_ = 0;
+  /**
+   * @brief JsonAPI(remotePayoutSerialId) value
+   */
+  uint64_t remote_payout_serial_id_ = 0;
+  /**
+   * @brief JsonAPI(remoteChangeSerialId) value
+   */
+  uint64_t remote_change_serial_id_ = 0;
   /**
    * @brief JsonAPI(refundLocktime) value
    */
@@ -4872,6 +5244,10 @@ class CreateDlcTransactionsRequest
    * @brief JsonAPI(fundLockTime) value
    */
   uint64_t fund_lock_time_ = 0;
+  /**
+   * @brief JsonAPI(fundOutputSerialId) value
+   */
+  uint64_t fund_output_serial_id_ = 0;
   /**
    * @brief JsonAPI(optionDest) value
    */
@@ -5113,191 +5489,6 @@ class CreateDlcTransactionsResponse
    * @brief JsonAPI(refundTxHex) value
    */
   std::string refund_tx_hex_ = "";
-};
-
-// ------------------------------------------------------------------------
-// TxInRequest
-// ------------------------------------------------------------------------
-/**
- * @brief JSON-API (TxInRequest) class
- */
-class TxInRequest
-  : public cfd::core::JsonClassBase<TxInRequest> {
- public:
-  TxInRequest() {
-    CollectFieldName();
-  }
-  virtual ~TxInRequest() {
-    // do nothing
-  }
-  /**
-   * @brief collect field name.
-   */
-  static void CollectFieldName();
-
-  /**
-   * @brief Get of txid
-   * @return txid
-   */
-  std::string GetTxid() const {
-    return txid_;
-  }
-  /**
-   * @brief Set to txid
-   * @param[in] txid    setting value.
-   */
-  void SetTxid(  // line separate
-    const std::string& txid) {  // NOLINT
-    this->txid_ = txid;
-  }
-  /**
-   * @brief Get data type of txid
-   * @return Data type of txid
-   */
-  static std::string GetTxidFieldType() {
-    return "std::string";
-  }
-  /**
-   * @brief Get json string of txid field.
-   * @param[in,out] obj     class object.
-   * @return JSON string
-   */
-  static std::string GetTxidString(  // line separate
-      const TxInRequest& obj) {  // NOLINT
-    return cfd::core::ConvertToString(obj.txid_);
-  }
-  /**
-   * @brief Set json object to txid field.
-   * @param[in,out] obj     class object.
-   * @param[in] json_value  JSON object.
-   */
-  static void SetTxidString(  // line separate
-      TxInRequest& obj,  // NOLINT
-      const UniValue& json_value) {
-    cfd::core::ConvertFromUniValue(  // line separate
-      obj.txid_, json_value);
-  }
-
-  /**
-   * @brief Get of vout
-   * @return vout
-   */
-  uint32_t GetVout() const {
-    return vout_;
-  }
-  /**
-   * @brief Set to vout
-   * @param[in] vout    setting value.
-   */
-  void SetVout(  // line separate
-    const uint32_t& vout) {  // NOLINT
-    this->vout_ = vout;
-  }
-  /**
-   * @brief Get data type of vout
-   * @return Data type of vout
-   */
-  static std::string GetVoutFieldType() {
-    return "uint32_t";
-  }
-  /**
-   * @brief Get json string of vout field.
-   * @param[in,out] obj     class object.
-   * @return JSON string
-   */
-  static std::string GetVoutString(  // line separate
-      const TxInRequest& obj) {  // NOLINT
-    return cfd::core::ConvertToString(obj.vout_);
-  }
-  /**
-   * @brief Set json object to vout field.
-   * @param[in,out] obj     class object.
-   * @param[in] json_value  JSON object.
-   */
-  static void SetVoutString(  // line separate
-      TxInRequest& obj,  // NOLINT
-      const UniValue& json_value) {
-    cfd::core::ConvertFromUniValue(  // line separate
-      obj.vout_, json_value);
-  }
-
-  /**
-   * @brief Set ignore item.
-   * @param[in] key   ignore target key name.
-   */
-  void SetIgnoreItem(const std::string& key) {
-    ignore_items.insert(key);
-  }
-
-  /**
-   * @brief Convert struct to class.
-   * @param[in] data   struct data.
-   */
-  void ConvertFromStruct(
-      const TxInRequestStruct& data);
-
-  /**
-   * @brief Convert class to struct.
-   * @return  struct data.
-   */
-  TxInRequestStruct ConvertToStruct()  const;
-
- protected:
-  /**
-   * @brief definition type of Map table.
-   */
-  using TxInRequestMapTable =
-    cfd::core::JsonTableMap<TxInRequest>;
-
-  /**
-   * @brief Get JSON mapping object.
-   * @return JSON mapping object.
-   * @see cfd::core::JsonClassBase::GetJsonMapper()
-   */
-  virtual const TxInRequestMapTable& GetJsonMapper() const {  // NOLINT
-    return json_mapper;
-  }
-  /**
-   * @brief Get item lists of JSON mapping.
-   * Fetch a list of target variable names in the order of definition.
-   * @return Item lists of JSON mapping.
-   * @see cfd::core::JsonClassBase::GetJsonItemList()
-   */
-  virtual const std::vector<std::string>& GetJsonItemList() const {
-    return item_list;
-  }
-  /**
-   * @brief Get ignore item lists of JSON mapping.
-   * Ignore the target variable at Serialize.
-   * @return Item list of JSON mapping.
-   * @see cfd::core::JsonClassBase::GetIgnoreItem()
-   */
-  virtual const std::set<std::string>& GetIgnoreItem() const {
-    return ignore_items;
-  }
-
- private:
- /**
-  * @brief JsonFunctionMap table
-  */
-  static TxInRequestMapTable json_mapper;
-  /**
-   * @brief field name list.
-   */
-  static std::vector<std::string> item_list;
-  /**
-   * @brief ignore item list.
-   */
-  std::set<std::string> ignore_items;
-
-  /**
-   * @brief JsonAPI(txid) value
-   */
-  std::string txid_ = "";
-  /**
-   * @brief JsonAPI(vout) value
-   */
-  uint32_t vout_ = 0;
 };
 
 // ------------------------------------------------------------------------
@@ -5638,7 +5829,7 @@ class CreateFundTransactionRequest
    * @brief Get of localInputs.
    * @return localInputs
    */
-  JsonObjectVector<TxInRequest, TxInRequestStruct>& GetLocalInputs() {  // NOLINT
+  JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct>& GetLocalInputs() {  // NOLINT
     return local_inputs_;
   }
   /**
@@ -5646,7 +5837,7 @@ class CreateFundTransactionRequest
    * @param[in] local_inputs    setting value.
    */
   void SetLocalInputs(  // line separate
-      const JsonObjectVector<TxInRequest, TxInRequestStruct>& local_inputs) {  // NOLINT
+      const JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct>& local_inputs) {  // NOLINT
     this->local_inputs_ = local_inputs;
   }
   /**
@@ -5654,7 +5845,7 @@ class CreateFundTransactionRequest
    * @return Data type of localInputs.
    */
   static std::string GetLocalInputsFieldType() {
-    return "JsonObjectVector<TxInRequest, TxInRequestStruct>";  // NOLINT
+    return "JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct>";  // NOLINT
   }
   /**
    * @brief Get json string of localInputs field.
@@ -5726,7 +5917,7 @@ class CreateFundTransactionRequest
    * @brief Get of remoteInputs.
    * @return remoteInputs
    */
-  JsonObjectVector<TxInRequest, TxInRequestStruct>& GetRemoteInputs() {  // NOLINT
+  JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct>& GetRemoteInputs() {  // NOLINT
     return remote_inputs_;
   }
   /**
@@ -5734,7 +5925,7 @@ class CreateFundTransactionRequest
    * @param[in] remote_inputs    setting value.
    */
   void SetRemoteInputs(  // line separate
-      const JsonObjectVector<TxInRequest, TxInRequestStruct>& remote_inputs) {  // NOLINT
+      const JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct>& remote_inputs) {  // NOLINT
     this->remote_inputs_ = remote_inputs;
   }
   /**
@@ -5742,7 +5933,7 @@ class CreateFundTransactionRequest
    * @return Data type of remoteInputs.
    */
   static std::string GetRemoteInputsFieldType() {
-    return "JsonObjectVector<TxInRequest, TxInRequestStruct>";  // NOLINT
+    return "JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct>";  // NOLINT
   }
   /**
    * @brief Get json string of remoteInputs field.
@@ -5940,6 +6131,178 @@ class CreateFundTransactionRequest
   }
 
   /**
+   * @brief Get of lockTime
+   * @return lockTime
+   */
+  uint64_t GetLockTime() const {
+    return lock_time_;
+  }
+  /**
+   * @brief Set to lockTime
+   * @param[in] lock_time    setting value.
+   */
+  void SetLockTime(  // line separate
+    const uint64_t& lock_time) {  // NOLINT
+    this->lock_time_ = lock_time;
+  }
+  /**
+   * @brief Get data type of lockTime
+   * @return Data type of lockTime
+   */
+  static std::string GetLockTimeFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of lockTime field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLockTimeString(  // line separate
+      const CreateFundTransactionRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.lock_time_);
+  }
+  /**
+   * @brief Set json object to lockTime field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLockTimeString(  // line separate
+      CreateFundTransactionRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.lock_time_, json_value);
+  }
+
+  /**
+   * @brief Get of localSerialId
+   * @return localSerialId
+   */
+  uint64_t GetLocalSerialId() const {
+    return local_serial_id_;
+  }
+  /**
+   * @brief Set to localSerialId
+   * @param[in] local_serial_id    setting value.
+   */
+  void SetLocalSerialId(  // line separate
+    const uint64_t& local_serial_id) {  // NOLINT
+    this->local_serial_id_ = local_serial_id;
+  }
+  /**
+   * @brief Get data type of localSerialId
+   * @return Data type of localSerialId
+   */
+  static std::string GetLocalSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of localSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetLocalSerialIdString(  // line separate
+      const CreateFundTransactionRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.local_serial_id_);
+  }
+  /**
+   * @brief Set json object to localSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetLocalSerialIdString(  // line separate
+      CreateFundTransactionRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.local_serial_id_, json_value);
+  }
+
+  /**
+   * @brief Get of remoteSerialId
+   * @return remoteSerialId
+   */
+  uint64_t GetRemoteSerialId() const {
+    return remote_serial_id_;
+  }
+  /**
+   * @brief Set to remoteSerialId
+   * @param[in] remote_serial_id    setting value.
+   */
+  void SetRemoteSerialId(  // line separate
+    const uint64_t& remote_serial_id) {  // NOLINT
+    this->remote_serial_id_ = remote_serial_id;
+  }
+  /**
+   * @brief Get data type of remoteSerialId
+   * @return Data type of remoteSerialId
+   */
+  static std::string GetRemoteSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of remoteSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetRemoteSerialIdString(  // line separate
+      const CreateFundTransactionRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.remote_serial_id_);
+  }
+  /**
+   * @brief Set json object to remoteSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetRemoteSerialIdString(  // line separate
+      CreateFundTransactionRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.remote_serial_id_, json_value);
+  }
+
+  /**
+   * @brief Get of outputSerialId
+   * @return outputSerialId
+   */
+  uint64_t GetOutputSerialId() const {
+    return output_serial_id_;
+  }
+  /**
+   * @brief Set to outputSerialId
+   * @param[in] output_serial_id    setting value.
+   */
+  void SetOutputSerialId(  // line separate
+    const uint64_t& output_serial_id) {  // NOLINT
+    this->output_serial_id_ = output_serial_id;
+  }
+  /**
+   * @brief Get data type of outputSerialId
+   * @return Data type of outputSerialId
+   */
+  static std::string GetOutputSerialIdFieldType() {
+    return "uint64_t";
+  }
+  /**
+   * @brief Get json string of outputSerialId field.
+   * @param[in,out] obj     class object.
+   * @return JSON string
+   */
+  static std::string GetOutputSerialIdString(  // line separate
+      const CreateFundTransactionRequest& obj) {  // NOLINT
+    return cfd::core::ConvertToString(obj.output_serial_id_);
+  }
+  /**
+   * @brief Set json object to outputSerialId field.
+   * @param[in,out] obj     class object.
+   * @param[in] json_value  JSON object.
+   */
+  static void SetOutputSerialIdString(  // line separate
+      CreateFundTransactionRequest& obj,  // NOLINT
+      const UniValue& json_value) {
+    cfd::core::ConvertFromUniValue(  // line separate
+      obj.output_serial_id_, json_value);
+  }
+
+  /**
    * @brief Set ignore item.
    * @param[in] key   ignore target key name.
    */
@@ -6023,7 +6386,7 @@ class CreateFundTransactionRequest
   /**
    * @brief JsonAPI(localInputs) value
    */
-  JsonObjectVector<TxInRequest, TxInRequestStruct> local_inputs_;  // NOLINT
+  JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct> local_inputs_;  // NOLINT
   /**
    * @brief JsonAPI(localChange) value
    */
@@ -6031,7 +6394,7 @@ class CreateFundTransactionRequest
   /**
    * @brief JsonAPI(remoteInputs) value
    */
-  JsonObjectVector<TxInRequest, TxInRequestStruct> remote_inputs_;  // NOLINT
+  JsonObjectVector<TxInInfoRequest, TxInInfoRequestStruct> remote_inputs_;  // NOLINT
   /**
    * @brief JsonAPI(remoteChange) value
    */
@@ -6048,6 +6411,22 @@ class CreateFundTransactionRequest
    * @brief JsonAPI(optionPremium) value
    */
   uint64_t option_premium_ = 0;
+  /**
+   * @brief JsonAPI(lockTime) value
+   */
+  uint64_t lock_time_ = 0;
+  /**
+   * @brief JsonAPI(localSerialId) value
+   */
+  uint64_t local_serial_id_ = 0;
+  /**
+   * @brief JsonAPI(remoteSerialId) value
+   */
+  uint64_t remote_serial_id_ = 0;
+  /**
+   * @brief JsonAPI(outputSerialId) value
+   */
+  uint64_t output_serial_id_ = 0;
 };
 
 // ------------------------------------------------------------------------

@@ -81,6 +81,8 @@ export interface CreateCetRequest {
     fundTxId: string;
     fundVout?: number;
     lockTime: bigint | number;
+    localSerialId?: bigint | number;
+    remoteSerialId?: bigint | number;
 }
 
 export interface CreateCetResponse {
@@ -96,8 +98,12 @@ export interface CreateDlcTransactionsRequest {
     remoteFinalScriptPubkey: string;
     localInputAmount: bigint | number;
     localCollateralAmount: bigint | number;
+    localPayoutSerialId: bigint | number;
+    localChangeSerialId: bigint | number;
     remoteInputAmount: bigint | number;
     remoteCollateralAmount: bigint | number;
+    remotePayoutSerialId: bigint | number;
+    remoteChangeSerialId: bigint | number;
     refundLocktime: bigint | number;
     localInputs: TxInInfoRequest[];
     localChangeScriptPubkey: string;
@@ -106,6 +112,7 @@ export interface CreateDlcTransactionsRequest {
     feeRate: number;
     cetLockTime?: bigint | number;
     fundLockTime?: bigint | number;
+    fundOutputSerialId?: bigint | number;
     optionDest?: string;
     optionPremium?: bigint | number;
 }
@@ -121,13 +128,17 @@ export interface CreateFundTransactionRequest {
     localPubkey: string;
     remotePubkey: string;
     outputAmount: bigint | number;
-    localInputs: TxInRequest[];
+    localInputs: TxInInfoRequest[];
     localChange: TxOutRequest;
-    remoteInputs: TxInRequest[];
+    remoteInputs: TxInInfoRequest[];
     remoteChange: TxOutRequest;
     feeRate: bigint | number;
     optionDest?: string;
     optionPremium?: bigint | number;
+    lockTime?: bigint | number;
+    localSerialId?: bigint | number;
+    remoteSerialId?: bigint | number;
+    outputSerialId?: bigint | number;
 }
 
 export interface CreateFundTransactionResponse {
@@ -231,11 +242,7 @@ export interface TxInInfoRequest {
     vout: number;
     redeemScript?: string;
     maxWitnessLength: number;
-}
-
-export interface TxInRequest {
-    txid: string;
-    vout: number;
+    inputSerialId?: bigint | number;
 }
 
 export interface TxOutRequest {

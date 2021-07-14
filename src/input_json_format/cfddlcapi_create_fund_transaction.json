@@ -9,10 +9,14 @@
     "outputAmount:type": "uint64_t",
     "localInputs": [
       {
-        ":class": "TxInRequest",
+        ":class": "TxInInfoRequest",
         "txid": "",
         "vout": 0,
-        "vout:type": "uint32_t"
+        "vout:type": "uint32_t",
+        "redeemScript": "",
+        "redeemScript:require": "optional",
+        "maxWitnessLength": 108,
+        "maxWitnessLength:type": "uint32_t"
       }
     ],
     "localChange": {
@@ -23,10 +27,14 @@
     },
     "remoteInputs": [
       {
-        ":class": "TxInRequest",
+        ":class": "TxInInfoRequest",
         "txid": "",
         "vout": 0,
-        "vout:type": "uint32_t"
+        "vout:type": "uint32_t",
+        "redeemScript": "",
+        "redeemScript:require": "optional",
+        "maxWitnessLength": 108,
+        "maxWitnessLength:type": "uint32_t"
       }
     ],
     "remoteChange": {
@@ -40,7 +48,19 @@
     "optionDest:require": "optional",
     "optionPremium": 0,
     "optionPremium:type": "uint64_t",
-    "optionPremium:require": "optional"
+    "optionPremium:require": "optional",
+    "lockTime": 0,
+    "lockTime:type": "uint64_t",
+    "lockTime:require": "optional",
+    "localSerialId": 0,
+    "localSerialId:type": "uint64_t",
+    "localSerialId:require": "optional",
+    "remoteSerialId": 0,
+    "remoteSerialId:type": "uint64_t",
+    "remoteSerialId:require": "optional",
+    "outputSerialId": 0,
+    "outputSerialId:type": "uint64_t",
+    "outputSerialId:require": "optional"
   },
   "response": {
     ":class": "CreateFundTransactionResponse",

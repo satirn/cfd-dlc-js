@@ -16,7 +16,13 @@
     "fundVout:require": "optional",
     "fundVout:type": "uint32_t",
     "lockTime": 0,
-    "lockTime:type": "uint64_t"
+    "lockTime:type": "uint64_t",
+    "localSerialId": 0,
+    "localSerialId:require": "optional",
+    "localSerialId:type": "uint64_t",
+    "remoteSerialId": 0,
+    "remoteSerialId:require": "optional",
+    "remoteSerialId:type": "uint64_t"
   },
   "response": {
     ":class": "CreateCetResponse",
