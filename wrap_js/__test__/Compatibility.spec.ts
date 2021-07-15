@@ -128,6 +128,10 @@ describe("Compatibility", () => {
           remoteInputAmount: TestData.RemoteInputAmount,
           localCollateralAmount: TestData.LocalCollateralAmount,
           remoteCollateralAmount: TestData.RemoteCollateralAmount,
+          localPayoutSerialId: 0,
+          localChangeSerialId: 0,
+          remotePayoutSerialId: 0,
+          remoteChangeSerialId: 0,
           localChangeScriptPubkey: GetScriptForLength(
             testVector.inputs.offerChangeSPKLen
           ),
